@@ -30,11 +30,10 @@ class Home extends Component
 
     public $script = '';
 
+    public $filtroDosLivros;
 
-   
+    public $pesquisarEscola;
 
-    #[On('create-livro')]
-    #[On('open-livro')]
     public function openLivro() {
         $this->hiddenOrShow = 'none';
 
@@ -42,48 +41,27 @@ class Home extends Component
 
 
 
+    #[On('create-livro')]
+    #[On('open-livro')]
     public function render()
     {
 
-        // $parser = new Parser();
-        // $pdf = $parser->parseFile(storage_path('app/public/c.pdf'));
+        if($this->filtroDosLivros == null || $this->filtroDosLivros == ""){
+            $this->livrosAll = Livro::all();
 
-        // $text = $pdf->getText();
-        // $this->html = nl2br($text);
-        // $this->parteDoHtml1 = substr($this->html, 0, 1000);
-        // $this->parteDoHtml2 = substr($this->html, 1001, 2000);
-        // $this->parteDoHtml3 = substr($this->html, 2001, 3000);
-
-
-        // $v = 0;
-
-        // for($i = 0; $i < Str::length($text); $i += 1000) {
-        //     $iAux = $i + 1000;
-        //     $this->textArray[$v] = substr($text, $i, $iAux);
-        //     $v++;
-
-        // }
+        }
+        elseif($this->filtroDosLivros == 'AZ'){
+            $this->livrosAll = Livro::orderBy('name', 'asc')->get();
+        }
+        elseif($this->filtroDosLivros == 'ZA'){
+            $this->livrosAll = Livro::orderBy('name', 'desc')->get();
+        }
 
 
-        $this->livrosAll = Livro::all();
+        if($this->pesquisarEscola != null || $this->pesquisarEscola != ""){
+            $this->livrosAll = Livro::where('name', 'like', '%' . $this->pesquisarEscola . '%')->get();
+        }
 
-
-
-        // $arquivos = File::files(public_path());
-
-        // foreach ($arquivos as $arquivo) {
-        // if (str_starts_with($arquivo->getFilename(), 'converted')) {
-        // File::delete($arquivo->getPathname());
-        // }
-        // }
-
-        // $imagick = new Imagick();
-        // $imagick->setResolution(300, 300); // aumenta a qualidade
-        // $imagick->readImage(storage_path('app/public/a.pdf'));
-        // $imagick->setImageFormat('jpeg');
-        // $imagick->writeImages('converted.jpg', true);
-        //dd('Total de páginas convertidas: ' . $imagick->getNumberImages());
-        //dd("done");
 
 
 

@@ -166,24 +166,25 @@
             <main class="w-full h-[90vh] bg-white p-8">
                 <div class="w-full h-full p-8 overflow-y-auto bg-white">
                     <div class="flex items-center w-full gap-8">
-                        <input id="searchSchool" class="bg-[#EAF4FF] text-[#A3B2D8] font-bold px-2 py-1 rounded-md text-center border-gray-300 focus:outline-none focus:border" placeholder="Pesquisar Obras... " >
-                        <select name="" id="Filtro de escolas" class="bg-[#084E80] text-white font-semibold  py-1  px-2 rounded-md text-center " >
-                            <option>Filtrar</option>
-                            <option value="AZ" >A-Z</option>
-                            <option value="AZ" >A-Z</option>
-                            <option value="AZ" >A-Z</option>
+                        <input wire:model.live="pesquisarEscola" class="bg-[#EAF4FF] text-[#A3B2D8] font-bold px-2 py-1 rounded-md  border-gray-300 focus:outline-none focus:border" placeholder="Pesquisar Obras... " >
+                        <select  wire:model.live="filtroDosLivros" class="bg-[#084E80] text-white font-semibold py-1 px-2 rounded-md text-center">
+                            <option value="">Filtrar</option>
+                            <option value="AZ">A-Z</option>
+                            <option value="ZA">Z-A</option>
                         </select>
 
-                     
 
-                            <livewire:livro.create/>
+
+                            <div>
+                                <livewire:livro.create/>
+                            </div>
                         </div>
                         <div class="flex flex-wrap w-full gap-4 mt-8">
 
                         @foreach ($livrosAll as $livro)
                         <div id="card" class="flex flex-col items-center justify-center w-40 bg-gray-200 h-60">
-                       
-                            <button class=" rounded-md w-28 h-36 hover:h-40 hover:w-32 focus:h-40 focus:w-32" @click="$dispatch('openLivro', {id: {{ $livro->id }}})"><img src="{{ asset('storage/capas/' . $livro->image_capa) }}"></button>
+
+                            <button class="rounded-md w-28 h-36 hover:h-40 hover:w-32 focus:h-40 focus:w-32" @click="$dispatch('openLivro', {id: {{ $livro->id }}})"><img src="{{ asset('storage/capas/' . $livro->image_capa) }}"></button>
                             <div class="mt-6 text-lg font-semibold text-gray-800 ">{{ $livro->name }}</div>
                         </div>
                         @endforeach
