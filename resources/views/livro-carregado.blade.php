@@ -1,0 +1,94 @@
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+    *{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: "Poppins", sans-serif;
+}
+
+#body {
+display: grid;
+place-content: center;
+height: 100vh;
+width: 100vw;
+overflow: hidden;
+background: #e4e4e4;
+}
+
+.flipbook {
+width: 1000px;
+height: 600px;
+
+}
+
+.flipbook .hard {
+background: #2b46c0 !important;
+color: #fff;
+font-weight: bold;
+border: none;
+
+}
+
+.flipbook .hard small{
+font-style: italic;
+font-weight: lighter;
+opacity: 0.7;
+font-size: 14px;
+}
+
+.flipbook .page {
+background: white;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+gap: 10px;
+border: 1px solid rgba(0, 0, 0, 0.11);
+}
+
+.page img{
+width: 100%;
+object-fit: cover;
+margin: 2px;
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.flipbook .page small{
+font-size: 14px;
+margin-bottom: 10px;
+}
+
+img{
+width: 100%;
+height: 100%;
+}
+
+
+</style>
+
+
+<div id="body">
+<div class="flipbook">
+    <div class="hard"> </div>
+    <div class="hard"></div>
+
+    @foreach ($images as $image)
+
+    <div class="page"><img src="{{ asset($image) }}"/></div>
+
+    @endforeach
+
+    <div class="hard"></div>
+    <div class="hard"></div>
+</div>
+</div>
+
+
+
+<script src="js/jquery.js"></script>
+<script src="js/turn.js"></script>
+<script>
+$(".flipbook").turn();
+</script>
