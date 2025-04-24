@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Livewire\Livro;
-
+use Imagick;
 use App\Models\Livro;
 use Livewire\Component;
 use Livewire\Attributes\On;
@@ -24,6 +24,46 @@ class Create extends Component
         $this->modal = false;
     }
 
+
+    public function convertPdfToImages()
+    {
+        $path = storage_path('app/public/capas');
+
+        if (!file_exists($path)) {
+            mkdir($path, 0755, true);
+        }
+
+
+            $ultimoRegistroParaColocarImagemDeCapa = Livro::latest()->first();
+
+
+            $imagick = new Imagick();
+            $imagick->setResolution(300, 300);
+
+            // Caminho completo do PDF, assumindo que $livro->link é algo como "nome.pdf"
+            $pdfPath = storage_path('app/public/storage/' . $ultimoRegistroParaColocarImagemDeCapa->link);
+
+            // Ler apenas a primeira página
+            $imagick->readImage($pdfPath . '[0]');
+            $imagick->setImageFormat('jpeg');
+
+            // Nome da imagem com base no nome do livro (sem extensão)
+            $filename = pathinfo($ultimoRegistroParaColocarImagemDeCapa->link, PATHINFO_FILENAME) . '.jpg';
+            $savePath = $path . '/' . $filename;
+
+            // Salvar a imagem
+            $imagick->writeImages($savePath, false);
+
+            // Atualizar a coluna image_capa no banco
+            $ultimoRegistroParaColocarImagemDeCapa->update([
+                'image_capa' => $filename
+            ]);
+    }
+
+
+
+
+
    // #[On('openModalCreate')]
     public function store() {
         $this->modal = true;
@@ -38,22 +78,20 @@ class Create extends Component
 
 
 
+        $this->validate([
+             'name' => 'required|min:4|max:100',
+             'description' => 'required|min:4|max:200',
+             'uploadLivro' => 'required|file',
+             'escola_id' => 'required|integer',
 
-        //ATENCAO EXCLUIR A COLUNA IMAGEM PQ NAO VAI PRECISAR
-      // dd($this->uploadLivro);
+        ]);
 
 
-       
+
+
         $filePath = $this->uploadLivro->store('storage', 'public');
         $this->uploadLivro = str_replace('storage/', '', $filePath);
 
-        // $this->validate([
-        //     'name' => 'required',
-        //     'description' => 'required',
-        //     'uploadLivro' => 'required|file',
-        //     'escola_id' => 'required',
-
-        // ]);
 
        //dd($this->name, $this->description, $this->uploadLivro, $this->escola_id, $this->uploadImage);
 
@@ -64,10 +102,12 @@ class Create extends Component
             'escola_id' => $this->escola_id,
         ]);
 
-
+       
+        $this->convertPdfToImages();
         $this->modal = false;
         $this->reset();
         $this->dispatch('create-livro');
+
     }
 
 

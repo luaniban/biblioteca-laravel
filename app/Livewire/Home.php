@@ -29,11 +29,11 @@ class Home extends Component
     public $hiddenOrShow = 'hidden';
 
     public $script = '';
-    public function convertPdfToImages()
-{
 
-}
 
+   
+
+    #[On('create-livro')]
     #[On('open-livro')]
     public function openLivro() {
         $this->hiddenOrShow = 'none';
@@ -44,6 +44,7 @@ class Home extends Component
 
     public function render()
     {
+
         // $parser = new Parser();
         // $pdf = $parser->parseFile(storage_path('app/public/c.pdf'));
 
@@ -65,6 +66,9 @@ class Home extends Component
 
 
         $this->livrosAll = Livro::all();
+
+
+
         // $arquivos = File::files(public_path());
 
         // foreach ($arquivos as $arquivo) {

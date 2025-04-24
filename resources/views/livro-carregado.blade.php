@@ -24,7 +24,7 @@ height: 600px;
 }
 
 .flipbook .hard {
-background: #2b46c0 !important;
+background: #ffffff !important;
 color: #fff;
 font-weight: bold;
 border: none;
@@ -71,17 +71,39 @@ height: 100%;
 
 <div id="body">
 <div class="flipbook">
-    <div class="hard"> </div>
-    <div class="hard"></div>
+
+    @php
+        $count = 0;
+    @endphp
+    @foreach ($images as $image)
+        <div class="hard"><img src="{{ asset($image) }}"/></div>
+        @if($count == 2)
+            @break
+        @endif
+        @php
+            $count++;
+        @endphp
+    @endforeach
+
+    @php
+        $count = 0;
+    @endphp
 
     @foreach ($images as $image)
 
-    <div class="page"><img src="{{ asset($image) }}"/></div>
+    @if ($count >= 2)
+        <div class="page"><img src="{{ asset($image) }}"/></div>
+
+    @endif
+    @php
+    $count++;
+    @endphp
+
 
     @endforeach
 
     <div class="hard"></div>
-    <div class="hard"></div>
+    
 </div>
 </div>
 

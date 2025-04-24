@@ -20,9 +20,11 @@ class LivroExibir extends Component
 
     #[On('openLivro')]
     public function openModal($id){
+
         $this->modal = true;
 
         $this->livro = Livro::findOrFail($id);
+       
         $this->descriptionLivro = $this->livro->description;
     }
 
@@ -32,7 +34,7 @@ class LivroExibir extends Component
         $this->modal = false;
 
 
-    $arquivos = File::files(public_path('storage/converted/'));
+    $arquivos = File::files(public_path('livro/converted/'));
 
         foreach ($arquivos as $arquivo) {
             if (str_starts_with($arquivo->getFilename(), 'page_')) {
@@ -47,7 +49,7 @@ class LivroExibir extends Component
         $imagick->setImageFormat('jpeg');
 
 
-     $outputDir = public_path('storage/converted/');
+     $outputDir = public_path('livro/converted/');
         if (!file_exists($outputDir)) {
             mkdir($outputDir, 0755, true);
         }
@@ -58,7 +60,7 @@ class LivroExibir extends Component
         $files = [];
         foreach (glob($outputDir . '*.jpg') as $file) {
             // Criar caminho relativo para usar com asset()
-            $files[] = 'storage/converted/' . basename($file);
+            $files[] = 'livro/converted/' . basename($file);
         }
 
         //dd($files);

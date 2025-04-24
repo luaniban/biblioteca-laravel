@@ -174,24 +174,17 @@
                             <option value="AZ" >A-Z</option>
                         </select>
 
+                     
 
                             <livewire:livro.create/>
                         </div>
                         <div class="flex flex-wrap w-full gap-4 mt-8">
-                            <div id="card" class="flex flex-col items-center justify-center w-40 bg-gray-200 h-60">
-                                @php
-                                $value = 1;
-                                @endphp
-                                {{-- <button class="bg-red-700 rounded-md w-28 h-36 hover:h-40 hover:w-32 focus:h-40 focus:w-32"  @click="$dispatch('openModalEdit', {value: $value})"></button>
-                                <div class="mt-2 text-lg font-semibold text-gray-800 ">Title</div> --}}
-                            @php
-                            $value++;
-                            @endphp
-                        </div>
+
                         @foreach ($livrosAll as $livro)
                         <div id="card" class="flex flex-col items-center justify-center w-40 bg-gray-200 h-60">
-                            <button class="bg-green-700 rounded-md w-28 h-36 hover:h-40 hover:w-32 focus:h-40 focus:w-32" @click="$dispatch('openLivro', {id: {{ $livro->id }}})"></button>
-                            <div class="mt-2 text-lg font-semibold text-gray-800 ">{{ $livro->name }}</div>
+                       
+                            <button class=" rounded-md w-28 h-36 hover:h-40 hover:w-32 focus:h-40 focus:w-32" @click="$dispatch('openLivro', {id: {{ $livro->id }}})"><img src="{{ asset('storage/capas/' . $livro->image_capa) }}"></button>
+                            <div class="mt-6 text-lg font-semibold text-gray-800 ">{{ $livro->name }}</div>
                         </div>
                         @endforeach
 
