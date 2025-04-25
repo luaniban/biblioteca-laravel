@@ -3,6 +3,7 @@
 namespace App\Livewire;
 use Imagick;
 use App\Models\Livro;
+use App\Models\Escola;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\Attributes\On;
@@ -34,11 +35,25 @@ class Home extends Component
 
     public $pesquisarEscola;
 
+    public $escolaAll;
+
+    public $filtroDasEscolas;
+
+    public $pesquisarLivro;
+
+    public $escolaSelecionadaId;
+
+    public $tituloDaHome = "Todos os Livros";
+
+    public function visualizarEscolaEspecifica($escolaId) {
+
+        $this->escolaSelecionadaId = $escolaId;
+
+    }
     public function openLivro() {
         $this->hiddenOrShow = 'none';
 
     }
-
 
 
     #[On('create-livro')]
@@ -46,25 +61,38 @@ class Home extends Component
     public function render()
     {
 
-        if($this->filtroDosLivros == null || $this->filtroDosLivros == ""){
-            $this->livrosAll = Livro::all();
-
-        }
-        elseif($this->filtroDosLivros == 'AZ'){
-            $this->livrosAll = Livro::orderBy('name', 'asc')->get();
-        }
-        elseif($this->filtroDosLivros == 'ZA'){
-            $this->livrosAll = Livro::orderBy('name', 'desc')->get();
+        if($this->escolaSelecionadaId !== null){
+            $this->tituloDaHome = "";
         }
 
+        if ($this->escolaSelecionadaId !== null) {
+            $nameDaEscola = Escola::where('id', $this->escolaSelecionadaId)->first();
+            $nameDaEscola = $nameDaEscola->name;
 
-        if($this->pesquisarEscola != null || $this->pesquisarEscola != ""){
-            $this->livrosAll = Livro::where('name', 'like', '%' . $this->pesquisarEscola . '%')->get();
+            $this->tituloDaHome = "Livros de " . $nameDaEscola;
+            $this->livrosAll = Livro::where('escola_id', $this->escolaSelecionadaId)->get();
+        }
+        else {
+            if ($this->filtroDosLivros === 'AZ') {
+                $this->livrosAll = Livro::orderBy('name', 'asc')->get();
+            } elseif ($this->filtroDosLivros === 'ZA') {
+                $this->livrosAll = Livro::orderBy('name', 'desc')->get();
+            } elseif (!empty($this->pesquisarLivro)) {
+                $this->livrosAll = Livro::where('name', 'like', '%' . $this->pesquisarLivro . '%')->get();
+            } else {
+                $this->livrosAll = Livro::all();
+            }
         }
 
-
-
-
+        if ($this->filtroDasEscolas === 'AZ') {
+            $this->livrosAll = Escola::orderBy('name', 'asc')->get();
+        } elseif ($this->filtroDasEscolas === 'ZA') {
+            $this->escolaAll = Escola::orderBy('name', 'desc')->get();
+        } elseif (!empty($this->pesquisarEscola)) {
+            $this->escolaAll = Escola::where('name', 'like', '%' . $this->pesquisarEscola . '%')->get();
+        } else {
+            $this->escolaAll = Escola::all();
+        }
 
         return view('livewire.home');
     }

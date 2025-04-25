@@ -5,45 +5,21 @@
             <img src="./img/logo-prefeitura.png" alt="Logo da prefeitura">
             <hr class="w-full">
            <div class="flex flex-col items-center w-full h-full px-4 py-4 bg-white rounded-md">
-                <input id="searchSchool" class="bg-[#EAF4FF] text-[#A3B2D8] font-bold w-full py-1 rounded-md text-center border-gray-300 focus:outline-none " placeholder="Pesquisar..." >
-                <select name="" id="Filtro de escolas" class="bg-[#084E80] text-white font-semibold  py-1  px-2 rounded-md text-center mt-4">
+
+                <input wire:model.live="pesquisarEscola" class="bg-[#EAF4FF] text-[#A3B2D8] font-bold w-full py-1 rounded-md text-center border-gray-300 focus:outline-none " placeholder="Pesquisar Escolas..." >
+                <select wire:model.live="filtroDasEscolas" class="bg-[#084E80] text-white font-semibold  py-1  px-2 rounded-md text-center mt-4">
+                    <option value="">Filtrar</option>
                     <option value="AZ" >A-Z</option>
-                    <option value="AZ" >A-Z</option>
-                    <option value="AZ" >A-Z</option>
+                    <option value="ZA" >Z-A</option>
                 </select>
 
-                <div class="w-full mt-4 overflow-y-auto">
+                <div class="w-full mt-4 ml-12 mr-8 overflow-y-auto">
                     <div class="max-h-[50vh] flex flex-col gap-5 mt-4 ">
+                        @foreach ($escolaAll as $escola)
+                            <p wire:click="visualizarEscolaEspecifica({{ $escola->id }})"  class="text-[#084E80] font-semibold hover:cursor-pointer px-2 py-1 hover:bg-gray-100 text-sm text-center">{{ $escola->name }}</p>
+                            <hr class="w-[85%]">
+                        @endforeach
 
-                        <p  class="text-[#084E80] font-semibold hover:cursor-pointer px-2 py-1 hover:bg-gray-100 ">Escola Exemplo 1</p>
-                        <hr class="w-[85%]">
-
-                        <p class="text-[#084E80] font-semibold hover:cursor-pointer hover:bg-gray-100 px-2 py-1">Escola Exemplo 2</p>
-                        <hr class="w-[85%]">
-
-                        <p class="text-[#084E80] font-semibold hover:cursor-pointer hover:bg-gray-100 px-2 py-1">Escola Exemplo 3</p>
-                        <hr class="w-[85%]">
-
-                        <p class="text-[#084E80] font-semibold hover:cursor-pointer hover:bg-gray-100 px-2 py-1">Escola Exemplo 4</p>
-                        <hr class="w-[85%]">
-
-                        <p class="text-[#084E80] font-semibold hover:cursor-pointer hover:bg-gray-100 px-2 py-1">Escola Exemplo 5</p>
-                        <hr class="w-[85%]">
-
-                        <p class="text-[#084E80] font-semibold hover:cursor-pointer hover:bg-gray-100 px-2 py-1">Escola Exemplo 4</p>
-                        <hr class="w-[85%]">
-
-                        <p class="text-[#084E80] font-semibold hover:cursor-pointer hover:bg-gray-100 px-2 py-1">Escola Exemplo 5</p>
-                        <hr class="w-[85%]">
-
-                        <p class="text-[#084E80] font-semibold hover:cursor-pointer hover:bg-gray-100 px-2 py-1">Escola Exemplo 4</p>
-                        <hr class="w-[85%]">
-
-                        <p class="text-[#084E80] font-semibold hover:cursor-pointer hover:bg-gray-100 px-2 py-1">Escola Exemplo 5</p>
-                        <hr class="w-[85%]">
-
-                        <p class="text-[#084E80] font-semibold hover:cursor-pointer hover:bg-gray-100 px-2 py-1">Escola Exemplo 4</p>
-                        <hr class="w-[85%]">
 
                 </div>
 
@@ -164,9 +140,10 @@
                 </nav>
             </header>
             <main class="w-full h-[90vh] bg-white p-8">
+                <h1 class="text-2xl font-bold">{{ $tituloDaHome }}</h1>
                 <div class="w-full h-full p-8 overflow-y-auto bg-white">
                     <div class="flex items-center w-full gap-8">
-                        <input wire:model.live="pesquisarEscola" class="bg-[#EAF4FF] text-[#A3B2D8] font-bold px-2 py-1 rounded-md  border-gray-300 focus:outline-none focus:border" placeholder="Pesquisar Obras... " >
+                        <input wire:model.live="pesquisarLivro" class="bg-[#EAF4FF] text-[#A3B2D8] font-bold px-2 py-1 rounded-md  border-gray-300 focus:outline-none focus:border" placeholder="Pesquisar Obras... " >
                         <select  wire:model.live="filtroDosLivros" class="bg-[#084E80] text-white font-semibold py-1 px-2 rounded-md text-center">
                             <option value="">Filtrar</option>
                             <option value="AZ">A-Z</option>

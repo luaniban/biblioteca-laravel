@@ -3,6 +3,7 @@
 namespace App\Livewire\Livro;
 use Imagick;
 use App\Models\Livro;
+use App\Models\Escola;
 use Livewire\Component;
 use Livewire\Attributes\On;
 use Livewire\WithFileUploads;
@@ -15,7 +16,7 @@ class Create extends Component
     public $description;
     public $uploadLivro;
     public $escola_id;
-
+    public $escolaAll;
 
     use WithFileUploads;
 
@@ -83,8 +84,9 @@ class Create extends Component
              'description' => 'required|min:4|max:200',
              'uploadLivro' => 'required|file',
              'escola_id' => 'required|integer',
-
         ]);
+
+
 
 
 
@@ -102,7 +104,7 @@ class Create extends Component
             'escola_id' => $this->escola_id,
         ]);
 
-       
+
         $this->convertPdfToImages();
         $this->modal = false;
         $this->reset();
@@ -113,6 +115,9 @@ class Create extends Component
 
     public function render()
     {
+
+        $this->escolaAll = Escola::all();
+
         return view('livewire.livro.create');
     }
 }

@@ -18,7 +18,12 @@
                 </div>
                 <div class="col-span-6">
                     <label for="name" class="text-gray-800">Escola<span class="ml-1 text-red-600">*</span></label>
-                    <input type="text" class="w-full border-gray-200 shadow-lg" wire:model="escola_id">
+                    <select type="text" class="text-sm border-gray-200 shadow-lg w-[100%]" wire:model="escola_id" >
+                        <option value="">Escolher escola</option>
+                        @foreach ($escolaAll as $escola)
+                            <option value="{{ $escola->id }}">{{ $escola->name }}</option>
+                        @endforeach
+                    </select>
                     @error('escola_id')
                         <span class="text-red-600">{{$message}}</span>
                     @enderror
