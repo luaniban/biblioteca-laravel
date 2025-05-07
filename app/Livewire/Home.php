@@ -45,6 +45,8 @@ class Home extends Component
 
     public $tituloDaHome = "Todos os Livros";
 
+    public $modalLoginUser = true;
+
     public function visualizarEscolaEspecifica($escolaId) {
 
         $this->escolaSelecionadaId = $escolaId;
@@ -53,6 +55,10 @@ class Home extends Component
     public function openLivro() {
         $this->hiddenOrShow = 'none';
 
+    }
+
+    public function closeUser() {
+        $this->modalLoginUser = false;
     }
 
 

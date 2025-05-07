@@ -14,7 +14,7 @@ place-content: center;
 height: 100vh;
 width: 100vw;
 overflow: hidden;
-background: #e4e4e4;
+background: #c0bdbd;
 }
 
 .flipbook {
@@ -77,7 +77,7 @@ height: 100%;
     @endphp
     @foreach ($images as $image)
         <div class="hard"><img src="{{ asset($image) }}"/></div>
-        @if($count == 2)
+        @if($count == 1)
             @break
         @endif
         @php
@@ -103,7 +103,7 @@ height: 100%;
     @endforeach
 
     <div class="hard"></div>
-    
+
 </div>
 </div>
 

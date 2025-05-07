@@ -1,4 +1,5 @@
 <div>
+
     <livewire:livro.livro-exibir/>
     <div class="flex">
         <section class="h-screen w-56 bg-[#BDD2F9] flex flex-col  items-center space-y-8 px-2 pb-4">
@@ -31,58 +32,62 @@
         <div class="flex flex-col w-full">
             <header class=" h-[10vh] bg-gradient-to-r from-[#084E80] to-[#0D76C0]">
                 <nav class="flex items-center justify-end w-full h-full px-2">
+                    @if($modalLoginUser)
+                        <div class="hidden sm:flex sm:items-center sm:ms-6">
+                            <!-- Teams Dropdown -->
+                            @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
+                                <div class="relative ms-3">
+                                    <x-dropdown align="right" width="60">
+                                        <x-slot name="trigger">
+                                            <span class="inline-flex rounded-md">
 
-                    <div class="hidden sm:flex sm:items-center sm:ms-6">
-                        <!-- Teams Dropdown -->
-                        @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
-                            <div class="relative ms-3">
-                                <x-dropdown align="right" width="60">
-                                    <x-slot name="trigger">
-                                        <span class="inline-flex rounded-md">
-                                            <button type="button" class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out bg-white border border-transparent rounded-md dark:text-gray-400 dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none focus:bg-gray-50 dark:focus:bg-gray-700 active:bg-gray-50 dark:active:bg-gray-700">
-                                                {{ Auth::user()->currentTeam->name }}
 
-                                                <svg class="ms-2 -me-0.5 size-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
-                                                </svg>
-                                            </button>
-                                        </span>
-                                    </x-slot>
+                                                <button type="button" class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out bg-white border border-transparent rounded-md dark:text-gray-400 dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none focus:bg-gray-50 dark:focus:bg-gray-700 active:bg-gray-50 dark:active:bg-gray-700">
+                                                    {{ Auth::user()->currentTeam->name }}
 
-                                    <x-slot name="content">
-                                        <div class="w-60">
-                                            <!-- Team Management -->
-                                            <div class="block px-4 py-2 text-xs text-gray-400">
-                                                {{ __('Manage Team') }}
-                                            </div>
+                                                    <svg class="ms-2 -me-0.5 size-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                                                    </svg>
+                                                </button>
 
-                                            <!-- Team Settings -->
-                                            <x-dropdown-link href="{{ route('teams.show', Auth::user()->currentTeam->id) }}">
-                                                {{ __('Team Settings') }}
-                                            </x-dropdown-link>
+                                            </span>
+                                        </x-slot>
 
-                                            @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
-                                                <x-dropdown-link href="{{ route('teams.create') }}">
-                                                    {{ __('Create New Team') }}
-                                                </x-dropdown-link>
-                                            @endcan
-
-                                            <!-- Team Switcher -->
-                                            @if (Auth::user()->allTeams()->count() > 1)
-                                                <div class="border-t border-gray-200 dark:border-gray-600"></div>
-
+                                        <x-slot name="content">
+                                            <div class="w-60">
+                                                <!-- Team Management -->
                                                 <div class="block px-4 py-2 text-xs text-gray-400">
-                                                    {{ __('Switch Teams') }}
+                                                    {{ __('Manage Team') }}
                                                 </div>
 
-                                                @foreach (Auth::user()->allTeams() as $team)
-                                                    <x-switchable-team :team="$team" />
-                                                @endforeach
-                                            @endif
-                                        </div>
-                                    </x-slot>
-                                </x-dropdown>
-                            </div>
+                                                <!-- Team Settings -->
+                                                <x-dropdown-link href="{{ route('teams.show', Auth::user()->currentTeam->id) }}">
+                                                    {{ __('Team Settings') }}
+                                                </x-dropdown-link>
+
+                                                @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
+                                                    <x-dropdown-link href="{{ route('teams.create') }}">
+                                                        {{ __('Create New Team') }}
+                                                    </x-dropdown-link>
+                                                @endcan
+
+                                                <!-- Team Switcher -->
+                                                @if (Auth::user()->allTeams()->count() > 1)
+                                                    <div class="border-t border-gray-200 dark:border-gray-600"></div>
+
+                                                    <div class="block px-4 py-2 text-xs text-gray-400">
+                                                        {{ __('Switch Teams') }}
+                                                    </div>
+
+                                                    @foreach (Auth::user()->allTeams() as $team)
+                                                        <x-switchable-team :team="$team" />
+                                                    @endforeach
+                                                @endif
+                                            </div>
+                                        </x-slot>
+                                    </x-dropdown>
+                                </div>
+
                         @endif
 
                         <!-- Settings Dropdown -->
@@ -137,6 +142,7 @@
                             </x-dropdown>
                         </div>
                     </div>
+                    @endif
                 </nav>
             </header>
             <main class="w-full h-[90vh] bg-white p-8">
@@ -160,8 +166,9 @@
 
                         @foreach ($livrosAll as $livro)
                         <div id="card" class="flex flex-col items-center justify-center w-40 bg-gray-200 h-60">
-
-                            <button class="rounded-md w-28 h-36 hover:h-40 hover:w-32 focus:h-40 focus:w-32" @click="$dispatch('openLivro', {id: {{ $livro->id }}})"><img src="{{ asset('storage/capas/' . $livro->image_capa) }}"></button>
+                            <div wire:click="closeUser">
+                                <button class="rounded-md w-28 h-36 hover:h-40 hover:w-32 focus:h-40 focus:w-32" @click="$dispatch('openLivro', {id: {{ $livro->id }}})"><img src="{{ asset('storage/capas/' . $livro->image_capa) }}"></button>
+                            </div>
                             <div class="mt-6 text-lg font-semibold text-gray-800 ">{{ $livro->name }}</div>
                         </div>
                         @endforeach
