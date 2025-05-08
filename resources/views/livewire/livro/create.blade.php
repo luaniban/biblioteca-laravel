@@ -1,5 +1,5 @@
 <div>
-    <button class="px-3 py-1 text-lg font-semibold text-white bg-blue-400 rounded-full hover:bg-blue-500" wire:click="store">Criar</button>
+    <button class="px-3 py-2 text-lg font-semibold text-white bg-blue-400 rounded-md hover:bg-blue-500" wire:click="store">Adicionar livro</button>
 
     @if($modal)
     <div class="fixed inset-0 flex items-center justify-center transition-all duration-300 ease-out bg-gray-500 bg-opacity-75" wire:click="closeModal">
@@ -32,6 +32,13 @@
                     <label for="name" class="text-gray-800 ">Descrição<span class="ml-1 text-red-600">*</span></label>
                     <textarea type="text" class="w-full border-gray-200 shadow-lg" wire:model="description"></textarea>
                     @error('description')
+                        <span class="text-red-600">{{$message}}</span>
+                    @enderror
+                </div>
+                <div  class="col-span-6 mt-4">
+                    <label for="name" class="text-gray-800 ">Nome do autor (aluno)<span class="ml-1 text-red-600">*</span></label>
+                    <input type="text" class="w-full border-gray-200 shadow-lg" wire:model="nome_aluno"></input>
+                    @error('nome_aluno')
                         <span class="text-red-600">{{$message}}</span>
                     @enderror
                 </div>

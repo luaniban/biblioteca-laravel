@@ -1,34 +1,50 @@
-<div>
+<div >
+    <style>
+        .scrollbar-thin-custom::-webkit-scrollbar {
+        width: 6px;
+        }
+        .scrollbar-thin-custom::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        }
+        .scrollbar-thin-custom::-webkit-scrollbar-thumb {
+        background-color: #9099e7;
+        border-radius: 10px;
+        }
+        .scrollbar-thin-custom::-webkit-scrollbar-thumb:hover {
+        background:  #6973cf;
+        }
 
+    </style>
     <livewire:livro.livro-exibir/>
     <div class="flex">
-        <section class="h-screen w-56 bg-[#BDD2F9] flex flex-col  items-center space-y-8 px-2 pb-4">
+        <section class="w-44 sm:w-56 bg-[#6293ee] flex flex-col  items-center space-y-8 px-4 pb-4 fixed top-0 left-0 bottom-0">
             <img src="./img/logo-prefeitura.png" alt="Logo da prefeitura">
             <hr class="w-full">
            <div class="flex flex-col items-center w-full h-full px-4 py-4 bg-white rounded-md">
+               <div class="flex items-center gap-2 ">
+                <img src="./img/search.png" alt="" class="w-4 h-4">
+                <input wire:model.live="pesquisarEscola" class="bg-[#EAF4FF] text-[#A3B2D8]  w-full py-1 rounded-md text-center border-gray-300 focus:outline-none text-sm" placeholder="Pesquisar Escolas..." >
+               </div>
+               <select wire:model.live="filtroDasEscolas" class="bg-[#084E80] text-white font-semibold  py-1  px-2 rounded-md text-center mt-4 text-sm">
+                   <option value="">Filtrar</option>
+                   <option value="AZ" >A-Z</option>
+                   <option value="ZA" >Z-A</option>
+               </select>
 
-                <input wire:model.live="pesquisarEscola" class="bg-[#EAF4FF] text-[#A3B2D8] font-bold w-full py-1 rounded-md text-center border-gray-300 focus:outline-none " placeholder="Pesquisar Escolas..." >
-                <select wire:model.live="filtroDasEscolas" class="bg-[#084E80] text-white font-semibold  py-1  px-2 rounded-md text-center mt-4">
-                    <option value="">Filtrar</option>
-                    <option value="AZ" >A-Z</option>
-                    <option value="ZA" >Z-A</option>
-                </select>
 
-                <div class="w-full mt-4 ml-12 mr-8 overflow-y-auto">
+                <div class="w-full h-full mt-4 ml-12 mr-8 overflow-y-auto scrollbar-thin-custom">
                     <div class="max-h-[50vh] flex flex-col gap-5 mt-4 ">
                         @foreach ($escolaAll as $escola)
                             <p wire:click="visualizarEscolaEspecifica({{ $escola->id }})"  class="text-[#084E80] font-semibold hover:cursor-pointer px-2 py-1 hover:bg-gray-100 text-sm text-center">{{ $escola->name }}</p>
                             <hr class="w-[85%]">
                         @endforeach
-
-
+                    </div>
                 </div>
-
-                </div>
-
-
            </div>
         </section>
+        <div class="h-full w-60">
+
+        </div>
         <div class="flex flex-col w-full">
             <header class=" h-[10vh] bg-gradient-to-r from-[#084E80] to-[#0D76C0]">
                 <nav class="flex items-center justify-end w-full h-full px-2">
@@ -145,33 +161,121 @@
                     @endif
                 </nav>
             </header>
-            <main class="w-full h-[90vh] bg-white p-8">
-                <h1 class="text-2xl font-bold">{{ $tituloDaHome }}</h1>
-                <div class="w-full h-full p-8 overflow-y-auto bg-white">
-                    <div class="flex items-center w-full gap-8">
-                        <input wire:model.live="pesquisarLivro" class="bg-[#EAF4FF] text-[#A3B2D8] font-bold px-2 py-1 rounded-md  border-gray-300 focus:outline-none focus:border" placeholder="Pesquisar Obras... " >
+            <main class="w-full h-full p-8 bg-[#c5d3ff]">
+
+                    <h1 class="text-2xl font-bold ">{{ $tituloDaHome }}</h1>
+
+
+                <div class="w-full  p-8  bg-[#c5d3ff]">
+                    <div class="flex items-center w-full gap-8 ">
+                        <div class="flex items-center gap-2 ">
+                            <img src="./img/search.png" alt="" class="w-5 h-5">
+                            <input wire:model.live="pesquisarLivro" class="bg-[#EAF4FF] text-[#A3B2D8]  px-2 py-1 rounded-md  border-gray-300 focus:outline-none focus:border" placeholder="Pesquisar Obras... "></input>
+                        </div>
+
                         <select  wire:model.live="filtroDosLivros" class="bg-[#084E80] text-white font-semibold py-1 px-2 rounded-md text-center">
                             <option value="">Filtrar</option>
                             <option value="AZ">A-Z</option>
                             <option value="ZA">Z-A</option>
                         </select>
 
+                        <livewire:livro.create/>
 
 
-                            <div>
-                                <livewire:livro.create/>
-                            </div>
-                        </div>
-                        <div class="flex flex-wrap w-full gap-4 mt-8">
+                    </div>
+                        <div class="flex flex-col w-full gap-12 mt-8">
 
-                        @foreach ($livrosAll as $livro)
-                        <div id="card" class="flex flex-col items-center justify-center w-40 bg-gray-200 h-60">
+                            @php
+                                use App\Models\Livro;
+
+                                $this->dispatch("escolas", ['escolas' => $escolaAll])
+
+                            @endphp
+
+
+
+                            @foreach ($escolaAll as $escola)
+
+                            @php
+
+                                $livros = Livro::where('escola_id', $escola->id)->get();
+
+                            @endphp
+                                @if( $livros->isNotEmpty() )
+                                <div class="w-full">
+
+                                <div class="mb-4 text-xl">{{$escola->name }}</div>
+
+                                    <div class="flex px-4 py-4 shadow-lg w-[70vw] bg-amber-800 shadow-slate-700 relative">
+                                        <div class="scale-75 translate-x-14 swiper-button-next swiper_{{ $escola->id }}_next"></div>
+                                        <div class="scale-75 swiper-button-prev -translate-x-14 swiper_{{ $escola->id }}_prev"></div>
+
+                                        <div class="w-full swiper swiper_{{ $escola->id }}">
+                                            <div class="swiper-wrapper">
+                                                @foreach ( $livros as $livro )
+
+
+                                                        <div id="card" class="flex flex-col items-center justify-center w-40 shadow-md swiper-slide h-60 bg-gradient-to-t from-gray-300 to-gray-50 shadow-slate-900">
+                                                            <div wire:click="closeUser">
+                                                                <button class="rounded-md w-28 h-36 hover:h-40 hover:w-32 focus:h-40 focus:w-32" @click="$dispatch('openLivro', {id: {{ $livro->id }}})"><img src="{{ asset('storage/capas/' . $livro->image_capa) }}"></button>
+                                                            </div>
+                                                            <div class="mt-6 text-lg font-semibold text-gray-800 ">{{ $livro->name }}</div>
+                                                        </div>
+                                                        <div id="card" class="flex flex-col items-center justify-center w-40 shadow-md swiper-slide h-60 bg-gradient-to-t from-gray-300 to-gray-50 shadow-slate-900">
+                                                            <div wire:click="closeUser">
+                                                                <button class="rounded-md w-28 h-36 hover:h-40 hover:w-32 focus:h-40 focus:w-32" @click="$dispatch('openLivro', {id: {{ $livro->id }}})"><img src="{{ asset('storage/capas/' . $livro->image_capa) }}"></button>
+                                                            </div>
+                                                            <div class="mt-6 text-lg font-semibold text-gray-800 ">{{ $livro->name }}</div>
+                                                        </div>
+                                                        <div id="card" class="flex flex-col items-center justify-center w-40 shadow-md swiper-slide h-60 bg-gradient-to-t from-gray-300 to-gray-50 shadow-slate-900">
+                                                            <div wire:click="closeUser">
+                                                                <button class="rounded-md w-28 h-36 hover:h-40 hover:w-32 focus:h-40 focus:w-32" @click="$dispatch('openLivro', {id: {{ $livro->id }}})"><img src="{{ asset('storage/capas/' . $livro->image_capa) }}"></button>
+                                                            </div>
+                                                            <div class="mt-6 text-lg font-semibold text-gray-800 ">{{ $livro->name }}</div>
+                                                        </div>
+                                                        <div id="card" class="flex flex-col items-center justify-center w-40 shadow-md swiper-slide h-60 bg-gradient-to-t from-gray-300 to-gray-50 shadow-slate-900">
+                                                            <div wire:click="closeUser">
+                                                                <button class="rounded-md w-28 h-36 hover:h-40 hover:w-32 focus:h-40 focus:w-32" @click="$dispatch('openLivro', {id: {{ $livro->id }}})"><img src="{{ asset('storage/capas/' . $livro->image_capa) }}"></button>
+                                                            </div>
+                                                            <div class="mt-6 text-lg font-semibold text-gray-800 ">{{ $livro->name }}</div>
+                                                        </div>
+                                                        <div id="card" class="flex flex-col items-center justify-center w-40 shadow-md swiper-slide h-60 bg-gradient-to-t from-gray-300 to-gray-50 shadow-slate-900">
+                                                            <div wire:click="closeUser">
+                                                                <button class="rounded-md w-28 h-36 hover:h-40 hover:w-32 focus:h-40 focus:w-32" @click="$dispatch('openLivro', {id: {{ $livro->id }}})"><img src="{{ asset('storage/capas/' . $livro->image_capa) }}"></button>
+                                                            </div>
+                                                            <div class="mt-6 text-lg font-semibold text-gray-800 ">{{ $livro->name }}</div>
+                                                        </div>
+                                                        <div id="card" class="flex flex-col items-center justify-center w-40 shadow-md swiper-slide h-60 bg-gradient-to-t from-gray-300 to-gray-50 shadow-slate-900">
+                                                            <div wire:click="closeUser">
+                                                                <button class="rounded-md w-28 h-36 hover:h-40 hover:w-32 focus:h-40 focus:w-32" @click="$dispatch('openLivro', {id: {{ $livro->id }}})"><img src="{{ asset('storage/capas/' . $livro->image_capa) }}"></button>
+                                                            </div>
+                                                            <div class="mt-6 text-lg font-semibold text-gray-800 ">{{ $livro->name }}</div>
+                                                        </div>
+
+
+                                                @endforeach
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                @endif
+
+                            @endforeach
+
+                        {{-- @foreach ($livrosAll as $livro)
+                        <div id="card" class="flex flex-col items-center justify-center w-40 shadow-lg h-60 shadow-slate-600 bg-gradient-to-t from-gray-300 to-gray-50">
                             <div wire:click="closeUser">
                                 <button class="rounded-md w-28 h-36 hover:h-40 hover:w-32 focus:h-40 focus:w-32" @click="$dispatch('openLivro', {id: {{ $livro->id }}})"><img src="{{ asset('storage/capas/' . $livro->image_capa) }}"></button>
                             </div>
                             <div class="mt-6 text-lg font-semibold text-gray-800 ">{{ $livro->name }}</div>
                         </div>
-                        @endforeach
+                        @endforeach --}}
+
+
+
 
                     </div>
 
@@ -180,5 +284,12 @@
 
                 <livewire:livro.edit/>
             </main>
+
+
+            <script>
+
+
+              </script>
+
 
 </div>

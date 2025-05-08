@@ -19,6 +19,7 @@
     },
     "dependencies": {
         "jquery": "^3.7.1",
+        "swiper": "^11.2.6",
         "turn.js": "^1.0.5"
     }
 }

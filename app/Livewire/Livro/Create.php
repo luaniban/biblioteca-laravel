@@ -15,6 +15,7 @@ class Create extends Component
     public $name;
     public $description;
     public $uploadLivro;
+    public $nome_aluno;
     public $escola_id;
     public $escolaAll;
 
@@ -72,18 +73,19 @@ class Create extends Component
         $this->description = '';
         $this->uploadLivro = null;
         $this->escola_id = '';
-
+        $this->nome_aluno = '';
     }
 
     public function create() {
-
+       
 
 
         $this->validate([
              'name' => 'required|min:4|max:100',
              'description' => 'required|min:4|max:200',
-        
+             'uploadLivro' => 'required',
              'escola_id' => 'required|integer',
+             'nome_aluno' => 'required|string'
         ]);
 
 
@@ -102,6 +104,7 @@ class Create extends Component
             'description' => $this->description,
             'link' => $this->uploadLivro,
             'escola_id' => $this->escola_id,
+            'nome_aluno' =>$this->nome_aluno
         ]);
 
 

@@ -10,6 +10,7 @@ class Livro extends Model
         'name',
         'description',
         'image_capa',
+        'nome_aluno',
         'escola_id',
         'link',
     ];

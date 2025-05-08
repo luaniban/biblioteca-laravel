@@ -16,6 +16,7 @@ class LivroExibir extends Component
     public $modal;
     public $modalLivro = false;
     public $livro;
+    public $nome_aluno;
 
 
     #[On('openLivro')]
@@ -24,8 +25,9 @@ class LivroExibir extends Component
         $this->modal = true;
 
         $this->livro = Livro::findOrFail($id);
-       
+
         $this->descriptionLivro = $this->livro->description;
+        $this->nome_aluno = $this->livro->nome_aluno;
     }
 
     public function visualizarLivro() {

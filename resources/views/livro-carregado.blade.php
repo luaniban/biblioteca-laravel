@@ -14,12 +14,13 @@ place-content: center;
 height: 100vh;
 width: 100vw;
 overflow: hidden;
-background: #c0bdbd;
+background: #c5d3ff;
+
 }
 
 .flipbook {
-width: 1000px;
-height: 600px;
+width: 1200px;
+height: 700px;
 
 }
 
