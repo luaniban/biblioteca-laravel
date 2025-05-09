@@ -47,6 +47,10 @@ class Home extends Component
 
     public $modalLoginUser = true;
 
+    public $escolaAllList;
+
+    public $escola;
+
     public function visualizarEscolaEspecifica($escolaId) {
 
         $this->escolaSelecionadaId = $escolaId;
@@ -76,7 +80,7 @@ class Home extends Component
             $nameDaEscola = $nameDaEscola->name;
 
             $this->tituloDaHome = "Livros de " . $nameDaEscola;
-            $this->livrosAll = Livro::where('escola_id', $this->escolaSelecionadaId)->get();
+            //$this->livrosAll = Livro::where('escola_id', $this->escolaSelecionadaId)->get();
         }
         else {
             if ($this->filtroDosLivros === 'AZ') {
@@ -91,7 +95,7 @@ class Home extends Component
         }
 
         if ($this->filtroDasEscolas === 'AZ') {
-            $this->livrosAll = Escola::orderBy('name', 'asc')->get();
+            $this->escolaAll = Escola::orderBy('name', 'asc')->get();
         } elseif ($this->filtroDasEscolas === 'ZA') {
             $this->escolaAll = Escola::orderBy('name', 'desc')->get();
         } elseif (!empty($this->pesquisarEscola)) {
@@ -99,6 +103,20 @@ class Home extends Component
         } else {
             $this->escolaAll = Escola::all();
         }
+
+
+        $this->escolaAllList = Escola::all();
+
+        if ($this->escolaSelecionadaId !== null) {
+            $this->escolaAllList = Escola::where('id', $this->escolaSelecionadaId)->get();
+           $this->livrosAll = Livro::where('escola_id', $this->escolaSelecionadaId)->get();
+
+        }
+
+        $this->dispatch("escolas", ['escolas' => $this->escolaAllList]);
+        
+
+
 
         return view('livewire.home');
     }

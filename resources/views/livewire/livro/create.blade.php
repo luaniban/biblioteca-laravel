@@ -2,7 +2,7 @@
     <button class="px-3 py-2 text-lg font-semibold text-white bg-blue-400 rounded-md hover:bg-blue-500" wire:click="store">Adicionar livro</button>
 
     @if($modal)
-    <div class="fixed inset-0 flex items-center justify-center transition-all duration-300 ease-out bg-gray-500 bg-opacity-75" wire:click="closeModal">
+    <div class="fixed inset-0 flex items-center justify-center transition-all duration-300 ease-out bg-gray-500 bg-opacity-75 z-[80]" wire:click="closeModal">
         <!-- Modal -->
         <div class="w-1/2 p-6 bg-white rounded-lg" wire:click.stop>
             <h2 class="mb-2 text-2xl font-semibold">Adicionar Livro</h2>
