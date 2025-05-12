@@ -9,17 +9,22 @@ font-family: "Poppins", sans-serif;
 }
 
 #body {
-display: grid;
-place-content: center;
-height: 100vh;
-width: 100vw;
-overflow: hidden;
-background: #c5d3ff;
+  display: grid;
+  place-content: center;
+  overflow: hidden;
 
+  height: 100vh;
+  width: 100vw;
+
+  background-image: url('/img/fundoDoLivro.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover; /* ou 'contain', veja observação abaixo */
 }
 
+
 .flipbook {
-width: 1200px;
+width: 1100px;
 height: 700px;
 
 }
@@ -70,7 +75,8 @@ height: 100%;
 </style>
 
 
-<div id="body">
+
+<div id="body" class="bg-blue-500">
 <div class="flipbook">
 
     @php

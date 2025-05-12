@@ -51,6 +51,9 @@ class Home extends Component
 
     public $escola;
 
+    public $ordem ='';
+
+
     public function visualizarEscolaEspecifica($escolaId) {
 
         $this->escolaSelecionadaId = $escolaId;
@@ -84,15 +87,16 @@ class Home extends Component
         }
         else {
             if ($this->filtroDosLivros === 'AZ') {
-                $this->livrosAll = Livro::orderBy('name', 'asc')->get();
+                $this->ordem = 'AZ';
             } elseif ($this->filtroDosLivros === 'ZA') {
-                $this->livrosAll = Livro::orderBy('name', 'desc')->get();
-            } elseif (!empty($this->pesquisarLivro)) {
-                $this->livrosAll = Livro::where('name', 'like', '%' . $this->pesquisarLivro . '%')->get();
-            } else {
-                $this->livrosAll = Livro::all();
+                $this->ordem = 'ZA';
+            }
+              else {
+                $this->ordem = '';
             }
         }
+        //dump($this->livrosAll);
+
 
         if ($this->filtroDasEscolas === 'AZ') {
             $this->escolaAll = Escola::orderBy('name', 'asc')->get();
@@ -113,8 +117,9 @@ class Home extends Component
 
         }
 
+
         $this->dispatch("escolas", ['escolas' => $this->escolaAllList]);
-        
+
 
 
 

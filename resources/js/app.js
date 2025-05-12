@@ -14,7 +14,7 @@ Livewire.on('escolas', ([{ escolas }]) => {
             if (el) {
                 new Swiper(".swiper_" + escola.id, {
                     loop: true,
-                    slidesPerView: 5.5,
+                    slidesPerView: 4.5,
                     spaceBetween: 40,
                     slidesPerGroup: 2,
                     pagination: {
