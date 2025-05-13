@@ -71,6 +71,7 @@ class Home extends Component
 
     #[On('create-livro')]
     #[On('open-livro')]
+    #[On('livro-deletado')]
     public function render()
     {
 

@@ -30,7 +30,7 @@
     <body class="font-sans antialiased">
         <x-banner />
 
-        <div class="  bg-[url('./img/fundoDoSiteTeste.png')] bg-auto bg-center bg-no-repeat h-screen ">
+        <div class="  bg-[url('./img/fundoDoSiteTeste.png')] place-content-center overflow-hidden h-screen w-screen bg-no-repeat bg-center bg-cover sm:pl-12">
             {{-- @livewire('navigation-menu') --}}
 
             <!-- Page Heading -->

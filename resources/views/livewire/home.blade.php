@@ -14,16 +14,31 @@
         background:  #6973cf;
         }
 
+
+        .wood-text {
+
+        font-weight: bold;
+        background: url('./img/texturaTexto.png') no-repeat center center;
+        background-size: cover;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+
+        text-shadow:
+        -1px -1px 0 rgba(255, 255, 255, 0.1),
+        1px 1px 2px rgba(0, 0, 0, 0.6),
+        2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
     </style>
     <livewire:livro.livro-exibir/>
-    <div class="flex">
-        <section class="w-44 sm:w-56 bg-[#6293ee] flex flex-col  items-center space-y-8 px-4 pb-4 fixed top-0 left-0 bottom-0">
+    <div class="flex justify-center ">
+        <section class="hidden sm:w-[15%]  bg-[#6293ee] sm:flex flex-col  items-center space-y-8 px-4 pb-4 fixed top-0 left-0 bottom-0">
             <img src="./img/logo-prefeitura.png" alt="Logo da prefeitura">
             <hr class="w-full">
-           <div class="flex flex-col items-center w-full h-full px-4 py-4 bg-white rounded-md">
+           <div class="flex flex-col items-center w-full px-4 py-4 bg-white rounded-md">
                <div class="flex items-center gap-2 ">
                 <img src="./img/search.png" alt="" class="w-4 h-4">
-                <input wire:model.live="pesquisarEscola" class="bg-[#EAF4FF] text-[#A3B2D8]  w-full py-1 rounded-md text-center border-gray-300 focus:outline-none text-sm" placeholder="Pesquisar Escolas..." >
+                <input wire:model.live="pesquisarEscola" class="bg-[#fff] text-[#A3B2D8] shadow-sm shadow-gray-600 w-full py-1 rounded-md text-center border-gray-300 focus:outline-none text-sm" placeholder="Pesquisar Escolas..." >
                </div>
                <select wire:model.live="filtroDasEscolas" class="bg-[#084E80] text-white font-semibold  py-1  px-2 rounded-md text-center mt-4 text-sm">
                    <option value="">Filtrar</option>
@@ -43,8 +58,8 @@
 
            </div>
 
-
-            <nav class="flex items-center justify-center w-full h-full px-2 ">
+            @auth
+            <nav class="flex flex-col items-center justify-center w-full gap-2 px-2 ">
 
                         <form method="POST" action="{{ route('logout') }}" x-data class="px-2 py-1 text-blue-500 bg-white rounded-lg hover:font-semibold hover:bg-gray-20">
                             @csrf
@@ -54,34 +69,43 @@
                                 {{ __('Log Out') }}
                             </a>
                         </form>
-
             </nav>
+            @endauth
 
         </section>
-        <div class="h-full w-60">
+        <div class="h-full hidden sm:w-[15%] sm:block">
 
         </div>
-        <div class="flex flex-col w-full">
+        <div class="flex flex-col sm:w-full ">
 
-            <main class="w-full h-full p-8 ">
+            <main class="w-full h-full sm:p-8 ">
 
-                    <h1 class="text-2xl font-bold text-white ">{{ $tituloDaHome }}</h1>
+                <h1 class="flex justify-center w-full text-3xl font-bold text-white sm:block">{{ $tituloDaHome }}</h1>
 
 
                 <div class="w-full p-8 ">
-                    <div class="flex items-center w-full gap-8 ">
+                    <div class="flex items-center justify-center w-full gap-8 sm:justify-start ">
                         <div class="flex items-center gap-2 ">
-                            <img src="./img/search.png" alt="" class="w-5 h-5">
-                            <input wire:model.live="pesquisarLivro" class="bg-[#EAF4FF] text-[#A3B2D8]  px-2 py-1 rounded-md  border-gray-300 focus:outline-none focus:border" placeholder="Pesquisar Obras... "></input>
+                            <img src="./img/searchBranco.png" alt="" class="w-5 h-5">
+                            <input wire:model.live="pesquisarLivro"class="bg-[#fff] text-[#A3B2D8]  px-2 py-1 rounded-md  border-gray-300 shadow-md shadow-gray-600 focus:outline-none focus:border" placeholder="Pesquisar Obras... "></input>
                         </div>
 
-                        <select  wire:model.live="filtroDosLivros" class="bg-[#084E80] text-white font-semibold py-1 px-2 rounded-md text-center">
+                        <select  wire:model.live="filtroDosLivros" class="bg-[#084E80] text-white font-semibold py-1 px-2 rounded-md text-center hidden  sm:block">
                             <option value="">Filtrar</option>
                             <option value="AZ">A-Z</option>
                             <option value="ZA">Z-A</option>
                         </select>
+                        @auth
+                        <div class="hidden gap-8 sm:flex">
+                            <livewire:livro.create/>
+                            @if(Auth::user()->id == 5)
+                            <button class="px-3 py-2 text-lg font-semibold text-white bg-gray-800 rounded-md hover:bg-gray-900" @click="$dispatch('open-modal-user')">Criar Usuário</button>
+                            @endif
+                        </div>
+                        @endauth
 
-                        <livewire:livro.create/>
+
+
 
 
                     </div>
@@ -119,11 +143,11 @@
                                 @if( $livrosAll->isNotEmpty() )
                                 <div class="w-full ">
 
-                                <div class="py-2 px-4 text-2xl font-semibold text-white  bg-[url('./img/fundoDoTitulo.png')] bg-cover bg-center bg-no-repeat w-[70vw]"><div>{{$escola->name }}</div></div>
+                                <div class="py-2 px-4 text-3xl font-semibold text-white  bg-[url('./img/fundoDoTitulo.png')] bg-cover bg-center bg-no-repeat sm:w-[70vw] w-[100vw]"><div class=" wood-text">{{$escola->name }}</div></div>
 
-                                    <div class="flex px-4 pt-12   w-[70vw]   relative bg-[url('./img/prateleiraTeste.png')] bg-cover bg-center bg-no-repeat ">
-                                        <div class="scale-75 translate-x-14 swiper-button-next swiper_{{ $escola->id }}_next text-white "></div>
-                                        <div class="scale-75 swiper-button-prev -translate-x-14 swiper_{{ $escola->id }}_prev text-white"></div>
+                                    <div class="flex  sm:px-4 pt-12  sm:w-[70vw]   relative bg-[url('./img/prateleiraTeste.png')] bg-cover bg-center bg-no-repeat w-[100vw]">
+                                        <div class="scale-75 translate-x-14 swiper-button-next swiper_{{ $escola->id }}_next text-white hidden sm:block"></div>
+                                        <div class="scale-75 swiper-button-prev -translate-x-14 swiper_{{ $escola->id }}_prev text-white hidden sm:block"></div>
 
                                         <div class="w-[90%] swiper swiper_{{ $escola->id }}">
                                             <div class=" swiper-wrapper">
@@ -131,36 +155,21 @@
 
                                                 @foreach ( $livrosAll as $livro )
 
-                                                        <div id="card" class="flex flex-col items-center justify-center w-48 shadow-xl swiper-slide h-60 bg-gradient-to-t from-gray-300 to-gray-50">
-                                                            <div wire:click="closeUser">
-                                                                <button class="rounded-md w-28 h-36 hover:h-40 hover:w-32 focus:h-40 focus:w-32" @click="$dispatch('openLivro', {id: {{ $livro->id }}})"><img src="{{ asset('storage/capas/' . $livro->image_capa) }}"></button>
-                                                            </div>
-                                                            <div class="mt-6 text-lg font-semibold text-gray-800 ">{{ $livro->name }}</div>
+                                                <div id="card" class="flex flex-col items-center justify-center w-48 swiper-slide h-60 bg-gradient-to-t from-gray-400 to-gray-50">
+                                                    @auth
+                                                        <div class="flex items-start justify-end w-full mb-1">
+                                                            <button class="px-2 py-1 text-sm font-semibold text-white bg-red-500 rounded-md hover:bg-red-600" @click="$dispatch('deleteLivro', {id: {{ $livro->id }}})">Excluir</button>
+
                                                         </div>
-                                                        <div id="card" class="flex flex-col items-center justify-center w-48 shadow-xl swiper-slide h-60 bg-gradient-to-t from-gray-300 to-gray-50">
-                                                            <div wire:click="closeUser">
-                                                                <button class="rounded-md w-28 h-36 hover:h-40 hover:w-32 focus:h-40 focus:w-32" @click="$dispatch('openLivro', {id: {{ $livro->id }}})"><img src="{{ asset('storage/capas/' . $livro->image_capa) }}"></button>
-                                                            </div>
-                                                            <div class="mt-6 text-lg font-semibold text-gray-800 ">{{ $livro->name }}</div>
-                                                        </div>
-                                                        <div id="card" class="flex flex-col items-center justify-center w-48 shadow-xl swiper-slide h-60 bg-gradient-to-t from-gray-300 to-gray-50">
-                                                            <div wire:click="closeUser">
-                                                                <button class="rounded-md w-28 h-36 hover:h-40 hover:w-32 focus:h-40 focus:w-32" @click="$dispatch('openLivro', {id: {{ $livro->id }}})"><img src="{{ asset('storage/capas/' . $livro->image_capa) }}"></button>
-                                                            </div>
-                                                            <div class="mt-6 text-lg font-semibold text-gray-800 ">{{ $livro->name }}</div>
-                                                        </div>
-                                                        <div id="card" class="flex flex-col items-center justify-center w-48 shadow-xl swiper-slide h-60 bg-gradient-to-t from-gray-300 to-gray-50">
-                                                            <div wire:click="closeUser">
-                                                                <button class="rounded-md w-28 h-36 hover:h-40 hover:w-32 focus:h-40 focus:w-32" @click="$dispatch('openLivro', {id: {{ $livro->id }}})"><img src="{{ asset('storage/capas/' . $livro->image_capa) }}"></button>
-                                                            </div>
-                                                            <div class="mt-6 text-lg font-semibold text-gray-800 ">{{ $livro->name }}</div>
-                                                        </div>
-                                                        <div id="card" class="flex flex-col items-center justify-center w-48 shadow-xl swiper-slide h-60 bg-gradient-to-t from-gray-300 to-gray-50">
-                                                            <div wire:click="closeUser">
-                                                                <button class="rounded-md w-28 h-36 hover:h-40 hover:w-32 focus:h-40 focus:w-32" @click="$dispatch('openLivro', {id: {{ $livro->id }}})"><img src="{{ asset('storage/capas/' . $livro->image_capa) }}"></button>
-                                                            </div>
-                                                            <div class="mt-6 text-lg font-semibold text-gray-800 ">{{ $livro->name }}</div>
-                                                        </div>
+                                                    @endauth
+                                                    <div wire:click="closeUser">
+                                                        <button class="rounded-md shadow-xl shadow-black w-28 h-36 hover:h-40 hover:w-32 focus:h-40 focus:w-32" @click="$dispatch('openLivro', {id: {{ $livro->id }}})"><img src="{{ asset('storage/capas/' . $livro->image_capa) }}"></button>
+                                                    </div>
+                                                    <div class="mt-6 text-lg font-semibold text-gray-800 ">{{ $livro->name }}</div>
+
+                                                </div>
+
+
 
 
                                                 @endforeach
@@ -170,7 +179,7 @@
 
 
                                     </div>
-                                    <div class="h-10   bg-[url('./img/fundoDoTitulo.png')] bg-cover bg-center bg-no-repeat w-[70vw]  shadow-slate-900 shadow-xl"></div>
+                                    <div class="h-10   bg-[url('./img/fundoDoTitulo.png')] bg-cover bg-center bg-no-repeat   shadow-black shadow-lg sm:w-[70vw] w-[100vw]"></div>
                                 </div>
                                 @endif
 
@@ -194,6 +203,8 @@
                 </div>
 
                 <livewire:livro.edit/>
+                <livewire:livro.delete/>
+                <livewire:user.register-user>
             </main>
 
 

@@ -25,6 +25,29 @@ Livewire.on('escolas', ([{ escolas }]) => {
                         nextEl: ".swiper_" + escola.id + "_next",
                         prevEl: ".swiper_" + escola.id + "_prev",
                     },
+                    breakpoints: {
+                        // até 1024px
+                        1024: {
+                            slidesPerView: 4.5,
+                        },
+                        // até 768px
+                        768: {
+                            slidesPerView: 3.5,
+                        },
+                        // até 640px
+                        640: {
+                            slidesPerView: 2.5,
+                        },
+                        // até 480px
+                        480: {
+                            slidesPerView: 1.5,
+
+                        },
+                        200: {
+                            slidesPerView:1.5,
+
+                        }
+                    }
                 });
             }
         });

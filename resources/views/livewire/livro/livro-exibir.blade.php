@@ -20,6 +20,8 @@
         }
     </style>
     @if($modal)
+
+
         <div class="fixed bottom-0 right-0 flex flex-col items-center justify-around h-[100%] bg-[#f1f1f1] w-52 z-[80]">
                 <div class="flex flex-col items-center w-full mt-8">
                     <div class="font-semibold text-center text-gray-400 text-md ">Feito por:</div>

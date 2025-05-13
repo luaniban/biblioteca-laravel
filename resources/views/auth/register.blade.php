@@ -1,4 +1,6 @@
 <x-guest-layout>
+
+
     <x-authentication-card>
         <x-slot name="logo">
             <x-authentication-card-logo />
@@ -10,22 +12,30 @@
             @csrf
 
             <div>
-                <x-label for="name" value="{{ __('Name') }}" />
+                <div class="flex">
+                    <x-label for="name" value="{{ __('Name') }}" /><span class="ml-1 font-bold text-red-500"> *</span>
+                </div>
                 <x-input id="name" class="block w-full mt-1" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
             </div>
 
             <div class="mt-4">
-                <x-label for="email" value="{{ __('Email') }}" />
+                <div class="flex">
+                    <x-label for="email" value="{{ __('Email') }}" /><span class="ml-1 font-bold text-red-500"> *</span>
+                </div>
                 <x-input id="email" class="block w-full mt-1" type="email" name="email" :value="old('email')" required autocomplete="username" />
             </div>
 
             <div class="mt-4">
-                <x-label for="password" value="{{ __('Password') }}" />
+                <div class="flex">
+                    <x-label for="password" value="{{ __('Password') }}" /><span class="ml-1 font-bold text-red-500"> *</span>
+                </div>
                 <x-input id="password" class="block w-full mt-1" type="password" name="password" required autocomplete="new-password" />
             </div>
 
             <div class="mt-4">
-                <x-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
+                <div class="flex">
+                    <x-label for="password_confirmation" value="{{ __('Confirm Password ') }}" /><span class="ml-1 font-bold text-red-500"> *</span>
+                </div>
                 <x-input id="password_confirmation" class="block w-full mt-1" type="password" name="password_confirmation" required autocomplete="new-password" />
             </div>
 
@@ -57,4 +67,5 @@
             </div>
         </form>
     </x-authentication-card>
+  
 </x-guest-layout>
