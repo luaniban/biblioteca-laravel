@@ -36,17 +36,10 @@ class LivroExibir extends Component
         $this->modal = false;
 
 
-    $arquivos = File::files(public_path('livro/converted/'));
-
-        foreach ($arquivos as $arquivo) {
-            if (str_starts_with($arquivo->getFilename(), 'page_')) {
-                File::delete($arquivo->getPathname());
-            }
-        }
-
+   
 
         $imagick = new Imagick();
-        $imagick->setResolution(300, 300); // aumenta a qualidade
+        $imagick->setResolution(100,100); // aumenta a qualidade
         $imagick->readImage(storage_path('app/public/storage/' . $this->livro->link));
         $imagick->setImageFormat('jpeg');
 
@@ -73,6 +66,7 @@ class LivroExibir extends Component
 
     public function render()
     {
+
         return view('livewire.livro.livro-exibir');
     }
 }

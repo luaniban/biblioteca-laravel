@@ -5,9 +5,12 @@ namespace App\Livewire\Livro;
 use App\Models\Livro;
 use Livewire\Component;
 use Livewire\Attributes\On;
+use TallStackUi\Traits\Interactions;
 
 class Delete extends Component
 {
+    use Interactions;
+
     public $modal = false;
     public $livro;
     public $name;
@@ -26,6 +29,7 @@ class Delete extends Component
     public function delete(){
         $this->livro->delete();
         $this->closeModal();
+        $this->toast()->success('Livro deletado com sucesso')->send();
         $this->dispatch('livro-deletado');
     }
 

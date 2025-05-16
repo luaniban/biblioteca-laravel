@@ -1,5 +1,5 @@
 <div>
-    <button class="px-3 py-2 text-lg font-semibold text-white bg-blue-400 rounded-md hover:bg-blue-500" wire:click="store">Adicionar livro</button>
+    <x-ts-button icon="book-open" wire:click="store">Adicionar livro</x-ts-button>
 
     @if($modal)
     <div class="fixed inset-0 flex items-center justify-center transition-all duration-300 ease-out bg-gray-500 bg-opacity-75 z-[80]" wire:click="closeModal">
@@ -18,12 +18,17 @@
                 </div>
                 <div class="col-span-6">
                     <label for="name" class="text-gray-800">Escola<span class="ml-1 text-red-600">*</span></label>
-                    <select type="text" class="text-sm border-gray-200 shadow-lg w-[100%]" wire:model="escola_id" >
-                        <option value="">Escolher escola</option>
-                        @foreach ($escolaAll as $escola)
-                            <option value="{{ $escola->id }}">{{ $escola->name }}</option>
-                        @endforeach
-                    </select>
+
+                    @php
+                        $options = [];
+                        foreach ($escolaAll as $escola) {
+                            $options[] = ['label' => $escola->name, 'value' => $escola->id];
+                        }
+                    @endphp
+                    <div  class="border-gray-200 shadow-lg">
+                        <x-ts-select.styled  wire:model="escola_id" :options="$options" searchable />
+                    </div>
+
                     @error('escola_id')
                         <span class="text-red-600">{{$message}}</span>
                     @enderror
@@ -45,7 +50,7 @@
 
                 <div  class="col-span-6">
                     <label for="name" class="text-gray-800">Upload do livro<span class="ml-1 text-red-600">*</span></label>
-                    <input type="file" class="w-full " wire:model="uploadLivro">
+                    <x-ts-upload  class="w-full " wire:model="uploadLivro"/>
                     @error('uploadLivro')
                         <span class="text-red-600">{{$message}}</span>
                     @enderror

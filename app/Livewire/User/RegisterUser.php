@@ -5,9 +5,14 @@ namespace App\Livewire\User;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\Attributes\On;
+use TallStackUi\Traits\Interactions;
 
 class RegisterUser extends Component
 {
+
+    use Interactions;
+
+
     public $name, $email, $password, $modal = false;
 
 
@@ -41,8 +46,9 @@ class RegisterUser extends Component
         ]);
 
 
-
+        $this->dispatch('user-created');
         $this->modal = false;
+        $this->toast()->success('Usuário criado com sucesso')->send();
         $this->reset();
 
 

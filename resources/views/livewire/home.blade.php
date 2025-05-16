@@ -36,15 +36,15 @@
             <img src="./img/logo-prefeitura.png" alt="Logo da prefeitura">
             <hr class="w-full">
            <div class="flex flex-col items-center w-full px-4 py-4 bg-white rounded-md">
-               <div class="flex items-center gap-2 ">
-                <img src="./img/search.png" alt="" class="w-4 h-4">
-                <input wire:model.live="pesquisarEscola" class="bg-[#fff] text-[#A3B2D8] shadow-sm shadow-gray-600 w-full py-1 rounded-md text-center border-gray-300 focus:outline-none text-sm" placeholder="Pesquisar Escolas..." >
+               <div class="flex items-center gap-2 mb-4">
+
+                <x-ts-input placeholder="Pesquisar..." wire:model.live="pesquisarEscola" icon="magnifying-glass" text="sm" ></x-ts-input>
+
                </div>
-               <select wire:model.live="filtroDasEscolas" class="bg-[#084E80] text-white font-semibold  py-1  px-2 rounded-md text-center mt-4 text-sm">
-                   <option value="">Filtrar</option>
-                   <option value="AZ" >A-Z</option>
-                   <option value="ZA" >Z-A</option>
-               </select>
+               <x-ts-select.styled   placeholder="Filtrar por..."  wire:model.live="filtroDasEscolas" :options="[
+                ['label' => 'A-Z', 'value' => 'AZ'],
+                ['label' => 'Z-A', 'value' => 'ZA'],
+            ]" />
 
 
                 <div class="w-full mt-4 ml-12 mr-8 overflow-y-auto scrollbar-thin-custom h-[40vh] ">
@@ -86,23 +86,27 @@
                 <div class="w-full p-8 ">
                     <div class="flex items-center justify-center w-full gap-8 sm:justify-start ">
                         <div class="flex items-center gap-2 ">
-                            <img src="./img/searchBranco.png" alt="" class="w-5 h-5">
-                            <input wire:model.live="pesquisarLivro"class="bg-[#fff] text-[#A3B2D8]  px-2 py-1 rounded-md  border-gray-300 shadow-md shadow-gray-600 focus:outline-none focus:border" placeholder="Pesquisar Obras... "></input>
-                        </div>
 
-                        <select  wire:model.live="filtroDosLivros" class="bg-[#084E80] text-white font-semibold py-1 px-2 rounded-md text-center hidden  sm:block">
-                            <option value="">Filtrar</option>
-                            <option value="AZ">A-Z</option>
-                            <option value="ZA">Z-A</option>
-                        </select>
+                            <x-ts-input placeholder="Pesquisar Obras..." wire:model.live="pesquisarLivro" icon="magnifying-glass" class="" ></x-ts-input>
+
+                        </div>
+                        <x-ts-select.styled   placeholder="Filtrar por..."  wire:model.live="filtroDosLivros" :options="[
+                            ['label' => 'A-Z', 'value' => 'AZ'],
+                            ['label' => 'Z-A', 'value' => 'ZA'],
+                        ]" />
+
                         @auth
                         <div class="hidden gap-8 sm:flex">
-                            <livewire:livro.create/>
+                            @if(Auth::user()->id != 5)
+                                <livewire:livro.create/>
+                            @endif
                             @if(Auth::user()->id == 5)
-                            <button class="px-3 py-2 text-lg font-semibold text-white bg-gray-800 rounded-md hover:bg-gray-900" @click="$dispatch('open-modal-user')">Criar Usuário</button>
+                                <x-ts-button icon="users" color="black" @click="$dispatch('open-table-user')">Tabela de Usuários</x-ts-button>
+
                             @endif
                         </div>
                         @endauth
+
 
 
 
@@ -155,12 +159,16 @@
 
                                                 @foreach ( $livrosAll as $livro )
 
-                                                <div id="card" class="flex flex-col items-center justify-center w-48 swiper-slide h-60 bg-gradient-to-t from-gray-400 to-gray-50">
+                                                <div id="card" class="flex flex-col items-center justify-center w-48 swiper-slide h-60 bg-gradient-to-t from-gray-50 to-gray-400">
                                                     @auth
-                                                        <div class="flex items-start justify-end w-full mb-1">
-                                                            <button class="px-2 py-1 text-sm font-semibold text-white bg-red-500 rounded-md hover:bg-red-600" @click="$dispatch('deleteLivro', {id: {{ $livro->id }}})">Excluir</button>
+                                                        @if(Auth::user()->id != 5)
 
-                                                        </div>
+                                                            <div class="fixed top-0 flex items-start justify-end w-full">
+
+                                                                <x-ts-button color="red" icon="trash" class="w-full h-8 text-sm rounded-none" @click="$dispatch('deleteLivro', {id: {{ $livro->id }}})">Excluir</x-ts-button>
+
+                                                            </div>
+                                                        @endif
                                                     @endauth
                                                     <div wire:click="closeUser">
                                                         <button class="rounded-md shadow-xl shadow-black w-28 h-36 hover:h-40 hover:w-32 focus:h-40 focus:w-32" @click="$dispatch('openLivro', {id: {{ $livro->id }}})"><img src="{{ asset('storage/capas/' . $livro->image_capa) }}"></button>
@@ -201,10 +209,10 @@
 
 
                 </div>
-
+                <x-ts-toast/>
                 <livewire:livro.edit/>
                 <livewire:livro.delete/>
-                <livewire:user.register-user>
+                <livewire:user.table>
             </main>
 
 

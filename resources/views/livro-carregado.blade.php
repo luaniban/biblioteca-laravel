@@ -109,7 +109,7 @@ height: 100%;
 
     @endforeach
 
-    <div class="hard"></div>
+ 
 
 </div>
 </div>

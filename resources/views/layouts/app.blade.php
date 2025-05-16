@@ -12,6 +12,8 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
         <!-- Scripts -->
+        <tallstackui:script />
+        @livewireStyles
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
         <!-- Styles -->
@@ -29,6 +31,9 @@
     </head>
     <body class="font-sans antialiased">
         <x-banner />
+       
+
+
 
         <div class="  bg-[url('./img/fundoDoSiteTeste.png')] place-content-center overflow-hidden h-screen w-screen bg-no-repeat bg-center bg-cover sm:pl-12">
             {{-- @livewire('navigation-menu') --}}

@@ -10,8 +10,8 @@ class LivroCarregado extends Controller
 
         $images = session('images', []);
 
-       // dd($images);
 
+        
 
         return view('livro-carregado', compact('images'));
     }

@@ -68,12 +68,26 @@ class Home extends Component
         $this->modalLoginUser = false;
     }
 
-
+    #[On('user-deletado')]
     #[On('create-livro')]
     #[On('open-livro')]
     #[On('livro-deletado')]
     public function render()
     {
+
+
+        if(\Route::currentRouteName() == 'dashboard'){
+
+            $arquivos = File::files(public_path('livro/converted/'));
+
+            foreach ($arquivos as $arquivo) {
+                if (str_starts_with($arquivo->getFilename(), 'page_')) {
+                    File::delete($arquivo->getPathname());
+                }
+            }
+        }
+
+
 
         if($this->escolaSelecionadaId !== null){
             $this->tituloDaHome = "";

@@ -8,6 +8,7 @@ use Livewire\Component;
 use Livewire\Attributes\On;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
+use TallStackUi\Traits\Interactions;
 
 class Create extends Component
 {
@@ -19,6 +20,7 @@ class Create extends Component
     public $escola_id;
     public $escolaAll;
 
+    use Interactions;
     use WithFileUploads;
 
     public function closeModal(){
@@ -77,7 +79,7 @@ class Create extends Component
     }
 
     public function create() {
-       
+
 
 
         $this->validate([
@@ -110,6 +112,7 @@ class Create extends Component
 
         $this->convertPdfToImages();
         $this->modal = false;
+        $this->toast()->success('Livro criado com sucesso')->send();
         $this->reset();
         $this->dispatch('create-livro');
 
