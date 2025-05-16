@@ -10,7 +10,7 @@ use TallStackUi\Traits\Interactions;
 class Delete extends Component
 {
     use Interactions;
-    
+
     public $modal = false;
     public $user;
     public $name;
@@ -29,7 +29,7 @@ class Delete extends Component
     public function delete(){
         $this->user->delete();
         $this->closeModal();
-        $this->toast()->success('Usuário deletado com sucesso')->send();
+        $this->toast()->success('Usuário deletado com sucesso 🗑️')->send();
         $this->dispatch('user-deletado');
     }
 

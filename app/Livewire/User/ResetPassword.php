@@ -16,7 +16,7 @@ class ResetPassword extends Component
     public function resetPassword($id) {
         $user = User::find($id);
         $user->password = bcrypt('Atividade1!');
-        $this->toast()->success('Senha resetada com sucesso')->send();
+        $this->toast()->success('Senha resetada com sucesso 🔑')->send();
         $user->save();
     }
 

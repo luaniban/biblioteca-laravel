@@ -35,11 +35,11 @@ class Edit extends Component
             'name' => 'required',
             'email' => 'required|email'
         ]);
-        
+
         $this->user->name = $this->name;
         $this->user->email = $this->email;
         $this->user->save();
-        $this->toast()->success('Usuário atualizado com sucesso')->send();
+        $this->toast()->success('Usuário atualizado com sucesso ✏️')->send();
         $this->closeModal();
         $this->dispatch('user-updated');
     }

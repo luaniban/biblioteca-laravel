@@ -76,7 +76,9 @@ height: 100%;
 
 
 
-<div id="body" class="bg-blue-500">
+<div id="body" >
+
+
 <div class="flipbook">
 
     @php
@@ -109,7 +111,6 @@ height: 100%;
 
     @endforeach
 
- 
 
 </div>
 </div>
@@ -120,4 +121,25 @@ height: 100%;
 <script src="js/turn.js"></script>
 <script>
 $(".flipbook").turn();
+
+
+  // Função para ir para a próxima página
+//   function nextPage() {
+//         $(".flipbook").turn('next');  // Usando a classe flipbook no jQuery
+//     }
+
+//     // Função para ir para a página anterior
+//     function previousPage() {
+//         $(".flipbook").turn('previous');  // Usando a classe flipbook no jQuery
+//     }
+
+//     // Vinculando as funções de navegação aos botões
+//     $("button").click(function() {
+//         if ($(this).text().includes("Próxima Página")) {
+//             nextPage();
+//         } else {
+//             previousPage();
+//         }
+//     });
+
 </script>

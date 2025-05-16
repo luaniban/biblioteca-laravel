@@ -5,8 +5,10 @@
         <div class="w-1/2 p-6 bg-white rounded-lg" wire:click.stop>
             <div>
 
-
-                <button class="px-3 py-2 mb-2 font-semibold text-white bg-gray-800 rounded-md text-md hover:bg-gray-900" @click="$dispatch('open-modal-user')">Criar Usuário</button>
+                <div class="flex justify-between">
+                    <button class="px-3 py-2 mb-2 font-semibold text-white bg-gray-800 rounded-md text-md hover:bg-gray-900" @click="$dispatch('open-modal-user')">Criar Usuário</button>
+                    <x-ts-input icon="magnifying-glass" placeholder="Pesquisar..." wire:model.live="pesquisarUser"></x-ts-input>
+                </div>
                 <table class="w-full">
                     <thead>
                       <tr class="border ">
@@ -28,7 +30,11 @@
                             </tr>
                         @endforeach
                     </tbody>
+
                   </table>
+                  <div class="mt-2 ">
+                      {{ $users->links() }}
+                  </div>
 
             </div>
         </div>

@@ -9,14 +9,14 @@
             <div class="grid items-center justify-center w-full grid-cols-12 gap-4 mb-6">
                 <div class="col-span-6">
                     <label for="name" class="text-gray-800">Nome do usuário<span class="ml-1 text-red-600">*</span></label>
-                    <input type="text" class="w-full border-gray-200 shadow-lg " wire:model="name">
+                    <x-ts-input type="text" class="w-full border-gray-200 shadow-lg " wire:model="name"/>
                     @error('name')
                         <span class="text-red-600">{{$message}}</span>
                     @enderror
                 </div>
                 <div class="col-span-6">
                     <label for="name" class="text-gray-800">Email<span class="ml-1 text-red-600">*</span></label>
-                    <input type="text" class="text-sm border-gray-200 shadow-lg w-[100%]" wire:model="email" >
+                    <x-ts-input type="text" class="text-sm border-gray-200 shadow-lg w-[100%]" wire:model="email" />
 
                     @error('email')
                         <span class="text-red-600">{{$message}}</span>
@@ -24,7 +24,7 @@
                 </div>
                 <div  class="col-span-6">
                     <label for="name" class="text-gray-800 ">Senha<span class="ml-1 text-red-600">*</span></label>
-                    <input type="text" class="w-full border-gray-200 shadow-lg" wire:model="password"></input>
+                    <x-ts-password type="text" class="w-full border-gray-200 shadow-lg" wire:model="password"></x-ts-password>
                     @error('password')
                         <span class="text-red-600">{{$message}}</span>
                     @enderror
