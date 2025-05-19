@@ -41,7 +41,7 @@
                 <x-ts-input placeholder="Pesquisar..." wire:model.live="pesquisarEscola" icon="magnifying-glass" text="sm" ></x-ts-input>
 
                </div>
-               <x-ts-select.styled   placeholder="Filtrar por..."  wire:model.live="filtroDasEscolas" :options="[
+               <x-ts-select.styled    placeholder="Filtrar por..."  wire:model.live="filtroDasEscolas" :options="[
                 ['label' => 'A-Z', 'value' => 'AZ'],
                 ['label' => 'Z-A', 'value' => 'ZA'],
             ]" />
@@ -59,7 +59,7 @@
            </div>
 
             @auth
-            <nav class="flex flex-col items-center justify-center w-full gap-2 px-2 ">
+            <nav class="flex flex-col items-center justify-end w-full h-full gap-2 px-2">
 
                         <form method="POST" action="{{ route('logout') }}" x-data class="px-2 py-1 text-blue-500 bg-white rounded-lg hover:font-semibold hover:bg-gray-20">
                             @csrf
@@ -164,16 +164,19 @@
                                                         @if(Auth::user()->id != 5)
 
                                                             <div class="fixed top-0 flex items-start justify-end w-full">
-
-                                                                <x-ts-button color="red" icon="trash" class="w-full h-8 text-sm rounded-none" @click="$dispatch('deleteLivro', {id: {{ $livro->id }}})">Excluir</x-ts-button>
+                                                                @if(Auth::user()->escola_id == $escola->id)
+                                                                    <x-ts-button color="red" icon="trash" class="w-full h-8 text-sm rounded-none" @click="$dispatch('deleteLivro', {id: {{ $livro->id }}})">Excluir</x-ts-button>
+                                                                @endif
 
                                                             </div>
                                                         @endif
                                                     @endauth
                                                     <div wire:click="closeUser">
-                                                        <button class="rounded-md shadow-xl shadow-black w-28 h-36 hover:h-40 hover:w-32 focus:h-40 focus:w-32" @click="$dispatch('openLivro', {id: {{ $livro->id }}})"><img src="{{ asset('storage/capas/' . $livro->image_capa) }}"></button>
+                                                        <button class="rounded-md shadow-xl shadow-slate-500 w-28 h-36 hover:h-40 hover:w-32 focus:h-40 focus:w-32" @click="$dispatch('openLivro', {id: {{ $livro->id }}})"><img src="{{ asset('storage/capas/' . $livro->image_capa) }}"></button>
                                                     </div>
-                                                    <div class="mt-6 text-lg font-semibold text-gray-800 ">{{ $livro->name }}</div>
+                                                    <div class="w-full h-full pb-2">
+                                                        <div class="w-full mt-6 text-lg font-semibold text-center text-gray-800 break-words ">{{ $livro->name }}</div>
+                                                    </div>
 
                                                 </div>
 
@@ -210,9 +213,13 @@
 
                 </div>
                 <x-ts-toast/>
-                <livewire:livro.edit/>
+
                 <livewire:livro.delete/>
                 <livewire:user.table>
+                @if (Hash::check('Atividade1!', Auth::user()->password))
+                    <livewire:user.new-password>
+                @endif
+
             </main>
 
 

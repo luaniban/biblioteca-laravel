@@ -24,7 +24,7 @@ class Table extends Component
     {
         $this->modal = false;
     }
-
+    
     #[On('user-deletado')]
     #[On('user-updated')]
     #[On('user-created')]

@@ -85,7 +85,7 @@ class Create extends Component
         $this->validate([
              'name' => 'required|min:4|max:100',
              'description' => 'required|min:4|max:200',
-             'uploadLivro' => 'required',
+             'uploadLivro' => 'required|mimes:pdf',
              'escola_id' => 'required|integer',
              'nome_aluno' => 'required|string'
         ]);

@@ -50,7 +50,7 @@
 
                 <div  class="col-span-6">
                     <label for="name" class="text-gray-800">Upload do livro<span class="ml-1 text-red-600">*</span></label>
-                    <x-ts-upload  class="w-full " wire:model="uploadLivro"/>
+                    <x-ts-upload  class="w-full " wire:model="uploadLivro" />
                     @error('uploadLivro')
                         <span class="text-red-600">{{$message}}</span>
                     @enderror

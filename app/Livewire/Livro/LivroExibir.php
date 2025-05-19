@@ -64,6 +64,11 @@ class LivroExibir extends Component
     }
 
 
+    public function closeModal() {
+        $this->modal = false;
+    }
+
+    #[On('livro-updated')]
     public function render()
     {
 

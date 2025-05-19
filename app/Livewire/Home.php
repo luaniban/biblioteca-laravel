@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use Livewire\Attributes\On;
 use Smalot\PdfParser\Parser;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Request;
 
 
 class Home extends Component
@@ -72,6 +73,7 @@ class Home extends Component
     #[On('create-livro')]
     #[On('open-livro')]
     #[On('livro-deletado')]
+    #[On('livro-updated')]
     public function render()
     {
 
@@ -135,6 +137,8 @@ class Home extends Component
 
         $this->dispatch("escolas", ['escolas' => $this->escolaAllList]);
 
+
+       // Gerar um identificador único e armazená-lo em um cookie
 
 
 

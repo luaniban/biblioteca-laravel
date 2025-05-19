@@ -15,6 +15,23 @@
                     @enderror
                 </div>
                 <div class="col-span-6">
+                    <label for="name" class="text-gray-800">Escola<span class="ml-1 text-red-600">*</span></label>
+
+                    @php
+                        $options = [];
+                        foreach ($escolaAll as $escola) {
+                            $options[] = ['label' => $escola->name, 'value' => $escola->id];
+                        }
+                    @endphp
+                    <div  class="border-gray-200 shadow-lg">
+                        <x-ts-select.styled  wire:model="escola_id" :options="$options" searchable />
+                    </div>
+
+                    @error('escola_id')
+                        <span class="text-red-600">{{$message}}</span>
+                    @enderror
+                </div>
+                <div class="col-span-6">
                     <label for="name" class="text-gray-800">Email<span class="ml-1 text-red-600">*</span></label>
                     <x-ts-input type="text" class="text-sm border-gray-200 shadow-lg w-[100%]" wire:model="email" />
 
