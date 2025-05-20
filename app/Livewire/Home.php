@@ -65,9 +65,6 @@ class Home extends Component
 
     }
 
-    public function closeUser() {
-        $this->modalLoginUser = false;
-    }
 
     #[On('user-deletado')]
     #[On('create-livro')]

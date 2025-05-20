@@ -171,7 +171,7 @@
                                                             </div>
                                                         @endif
                                                     @endauth
-                                                    <div wire:click="closeUser">
+                                                    <div >
                                                         <button class="rounded-md shadow-xl shadow-slate-500 w-28 h-36 hover:h-40 hover:w-32 focus:h-40 focus:w-32" @click="$dispatch('openLivro', {id: {{ $livro->id }}})"><img src="{{ asset('storage/capas/' . $livro->image_capa) }}"></button>
                                                     </div>
                                                     <div class="w-full h-full pb-2">
@@ -216,9 +216,11 @@
 
                 <livewire:livro.delete/>
                 <livewire:user.table>
+            @auth
                 @if (Hash::check('Atividade1!', Auth::user()->password))
                     <livewire:user.new-password>
                 @endif
+            @endauth
 
             </main>
 

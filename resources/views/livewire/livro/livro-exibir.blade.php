@@ -40,9 +40,11 @@
 
             </div>
             <div class="absolute z-50 flex items-end justify-center w-full gap-2 bottom-1">
-                @if(Auth::user()->id != 5)
-                    <x-ts-button icon="pencil"  @click="$dispatch('edit-book', {id: {{ $livro->id }}})"></x-ts-button>
-                @endif
+                @auth
+                    @if(Auth::user()->id != 5)
+                        <x-ts-button icon="pencil"  @click="$dispatch('edit-book', {id: {{ $livro->id }}})"></x-ts-button>
+                    @endif
+                @endauth
                 <x-ts-button icon="eye" wire:click='visualizarLivro'>Visualizar</x-ts-button>
             </div>
                 <div wire:loading>

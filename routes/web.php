@@ -18,5 +18,6 @@ Route::middleware([
     //Route::get('/admin', Home::class)->name('dashboard');
 });
 
-Route::get('/dashboard', Home::class)->name('dashboard');
+Route::get('/', Home::class)->name('dashboard');
+Route::get('/dashboard', Home::class);
 Route::get('/livro-exibir', [LivroCarregado::class, 'render'])->name('livro-carregado');

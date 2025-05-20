@@ -34,12 +34,8 @@ class LivroExibir extends Component
 
 
         $this->modal = false;
-
-
-
-
         $imagick = new Imagick();
- // aumenta a qualidade
+        //$imagick->setResolution(100, 100);
         $imagick->readImage(storage_path('app/public/storage/' . $this->livro->link));
         $imagick->setImageFormat('jpeg');
 
