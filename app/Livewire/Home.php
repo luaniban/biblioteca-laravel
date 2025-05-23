@@ -54,6 +54,7 @@ class Home extends Component
 
     public $ordem ='';
 
+    public $filtroDosLivrosPorSerie = null;
 
     public function visualizarEscolaEspecifica($escolaId) {
 
@@ -75,7 +76,7 @@ class Home extends Component
     {
 
 
-        if(\Route::currentRouteName() == 'dashboard'){
+        if(\Route::currentRouteName() == 'dashboard' || \Route::currentRouteName() == 'home'){
 
             $arquivos = File::files(public_path('livro/converted/'));
 
@@ -85,7 +86,6 @@ class Home extends Component
                 }
             }
         }
-
 
 
         if($this->escolaSelecionadaId !== null){
@@ -105,7 +105,9 @@ class Home extends Component
             } elseif ($this->filtroDosLivros === 'ZA') {
                 $this->ordem = 'ZA';
             }
-              else {
+              elseif ($this->filtroDosLivrosPorSerie != null) {
+                $this->ordem = "serie";
+            } else {
                 $this->ordem = '';
             }
         }

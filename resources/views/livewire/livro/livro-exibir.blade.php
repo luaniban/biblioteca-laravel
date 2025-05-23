@@ -22,7 +22,7 @@
     @if($modal)
 
 
-        <div class="fixed bottom-0 right-0 flex flex-col items-center justify-around h-[100%] bg-[#f1f1f1] w-52 z-[80]">
+        <div class="fixed bottom-0 right-0 flex flex-col items-center justify-around h-[100%] bg-[#ddf8fc] w-52 z-[80]">
             <div class="absolute z-50 top-2 right-2">
                 <x-ts-button icon="x-mark" class="rounded-full" wire:click="closeModal" color="none"></x-ts-button>
             </div>
@@ -39,13 +39,14 @@
             <div class="mt-8">
 
             </div>
-            <div class="absolute z-50 flex items-end justify-center w-full gap-2 bottom-1">
+            <div class="absolute z-50 flex flex-col justify-end w-full gap-2 px-6 bottom-1">
                 @auth
                     @if(Auth::user()->id != 5)
                         <x-ts-button icon="pencil"  @click="$dispatch('edit-book', {id: {{ $livro->id }}})"></x-ts-button>
                     @endif
                 @endauth
                 <x-ts-button icon="eye" wire:click='visualizarLivro'>Visualizar</x-ts-button>
+                <x-ts-button icon="arrow-down-tray" @click="$dispatch('baixar-book', {link: '{{ $livro->link }}'})"></x-ts-button>
             </div>
                 <div wire:loading>
                     <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
@@ -55,6 +56,8 @@
                 <x-ts-toast/>
 
                 <livewire:livro.edit/>
+                <livewire:livro.baixar-livro/>
+
         </div>
     @endif
 

@@ -48,13 +48,38 @@
                     @enderror
                 </div>
 
-                <div  class="col-span-6">
+                <div  class="col-span-6 border-gray-200 shadow-lg">
                     <label for="name" class="text-gray-800">Upload do livro<span class="ml-1 text-red-600">*</span></label>
                     <x-ts-upload  class="w-full " wire:model="uploadLivro" />
                     @error('uploadLivro')
                         <span class="text-red-600">{{$message}}</span>
                     @enderror
                 </div>
+
+                
+
+
+                <div class="col-span-6 border-gray-200 shadow-lg">
+                    <label for="name" class="text-gray-800 ">Ano do aluno<span class="ml-1 text-red-600">*</span></label>
+                    <x-ts-select.styled class=""  wire:model="serie" :options="[
+                        ['label' => '1º', 'value' => '1'],
+                        ['label' => '2º', 'value' => '2'],
+                        ['label' => '3º', 'value' => '3'],
+                        ['label' => '4º', 'value' => '4'],
+                        ['label' => '5º', 'value' => '5'],
+                        ['label' => '6º', 'value' => '6'],
+                        ['label' => '7º', 'value' => '7'],
+                        ['label' => '8º', 'value' => '8'],
+                        ['label' => '9º', 'value' => '9'],
+                       ]" />
+                    @error('serie')
+                    <span class="text-red-600">{{$message}}</span>
+                @enderror
+                </div>
+
+
+
+
 
             </div>
             <hr class="w-full mt-6 mb-4">
