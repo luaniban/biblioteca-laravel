@@ -99,7 +99,7 @@ class Home extends Component
             $this->tituloDaHome = "Livros de " . $nameDaEscola;
             //$this->livrosAll = Livro::where('escola_id', $this->escolaSelecionadaId)->get();
         }
-        else {
+
             if ($this->filtroDosLivros === 'AZ') {
                 $this->ordem = 'AZ';
             } elseif ($this->filtroDosLivros === 'ZA') {
@@ -110,7 +110,7 @@ class Home extends Component
             } else {
                 $this->ordem = '';
             }
-        }
+        
         //dump($this->livrosAll);
 
 
@@ -125,12 +125,12 @@ class Home extends Component
         }
 
 
+
         $this->escolaAllList = Escola::all();
 
         if ($this->escolaSelecionadaId !== null) {
             $this->escolaAllList = Escola::where('id', $this->escolaSelecionadaId)->get();
            $this->livrosAll = Livro::where('escola_id', $this->escolaSelecionadaId)->get();
-
         }
 
 

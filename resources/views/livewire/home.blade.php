@@ -79,36 +79,39 @@
         <div class="flex flex-col sm:w-full ">
 
             <main class="w-full h-full sm:p-8 ">
-                    <div class="flex w-full ">
-                        <h1 style="font-family: 'Poetsen One', sans-serif;" class="flex justify-center px-4 rounded-r-md  text-3xl font-bold text-[#fff] text-left sm:block bg-yellow-900">{{ $tituloDaHome }}</h1>
+                    <div class="flex justify-center w-full sm:justify-start">
+                        <h1 style="font-family: 'Poetsen One', sans-serif;" class=" px-4 rounded-r-md  text-3xl font-bold text-[#fff] sm:text-left sm:block bg-blue-900 sm:w-auto w-full text-center py-2">{{ $tituloDaHome }}</h1>
                     </div>
 
 
                 <div class="w-full p-8 ">
-                    <div class="flex items-center justify-center w-full gap-8 px-4 sm:justify-start ">
-                        <div class="flex items-center gap-2 ">
+                    <div class="grid items-center justify-center w-full grid-cols-6 gap-8 px-4 sm:flex sm:justify-start">
+                        <div class="items-center col-span-6 gap-2 sm:flex">
 
                             <x-ts-input placeholder="Pesquisar Obras..." wire:model.live="pesquisarLivro" icon="magnifying-glass" class="" ></x-ts-input>
 
                         </div>
+                        <div class="col-span-3 sm:flex">
                         <x-ts-select.styled   placeholder="Ordem Alfabética..."  wire:model.live="filtroDosLivros" :options="[
 
                             ['label' => 'A-Z', 'value' => 'AZ'],
                             ['label' => 'Z-A', 'value' => 'ZA'],
                         ]" />
+                        </div>
 
-
-                         <x-ts-select.styled   placeholder="Serie..."  wire:model.live="filtroDosLivrosPorSerie" :options="[
-                         ['label' => '1º', 'value' => '1'],
-                         ['label' => '2º', 'value' => '2'],
-                         ['label' => '3º', 'value' => '3'],
-                         ['label' => '4º', 'value' => '4'],
-                         ['label' => '5º', 'value' => '5'],
-                         ['label' => '6º', 'value' => '6'],
-                         ['label' => '7º', 'value' => '7'],
-                         ['label' => '8º', 'value' => '8'],
-                         ['label' => '9º', 'value' => '9'],
-                        ]" />
+                        <div class="col-span-3 sm:flex">
+                            <x-ts-select.styled   placeholder="Serie..."  wire:model.live="filtroDosLivrosPorSerie" :options="[
+                            ['label' => '1º', 'value' => '1'],
+                            ['label' => '2º', 'value' => '2'],
+                            ['label' => '3º', 'value' => '3'],
+                            ['label' => '4º', 'value' => '4'],
+                            ['label' => '5º', 'value' => '5'],
+                            ['label' => '6º', 'value' => '6'],
+                            ['label' => '7º', 'value' => '7'],
+                            ['label' => '8º', 'value' => '8'],
+                            ['label' => '9º', 'value' => '9'],
+                            ]" />
+                         </div>
 
                         @auth
                         <div class="hidden gap-8 sm:flex">
@@ -142,7 +145,7 @@
 
                             @php
 
-
+                                
                                if ($escolaSelecionadaId == null) {
                                 if ($pesquisarLivro != null) {
                                     $livrosAll = Livro::where('escola_id', $escola->id)->where('name', 'like', '%' . $pesquisarLivro . '%')->get();
@@ -161,6 +164,33 @@
                                 }
 
                                }
+
+                               elseif ($escolaSelecionadaId != null) {
+
+                                   if ($ordem == 'AZ') {
+
+                                       $livrosAll = Livro::where('escola_id', $escola->id)->orderBy('name', 'asc')->where('escola_id', $escolaSelecionadaId)->get();
+                                    }
+                                    elseif ($ordem == 'ZA') {
+
+                                        $livrosAll = Livro::where('escola_id', $escola->id)->orderBy('name', 'desc')->where('escola_id', $escolaSelecionadaId)->get();
+                                    }
+                                    elseif($ordem == 'serie'){
+
+                                        $livrosAll = Livro::where('escola_id', $escola->id)->where('serie', $filtroDosLivrosPorSerie)->where('escola_id', $escolaSelecionadaId)->get();
+                                    }
+                                    elseif ($ordem == "" ) {
+                                        $livrosAll = Livro::where('escola_id', $escola->id)->where('escola_id', $escolaSelecionadaId)->get();
+                                    }
+
+                                    if ($pesquisarLivro != null) {
+                                       $livrosAll = Livro::where('escola_id', $escola->id)->where('name', 'like', '%' . $pesquisarLivro . '%')->where('escola_id', $escolaSelecionadaId)->get();
+                                    }
+
+
+                               }
+
+
                             @endphp
                                 @if( $livrosAll->isNotEmpty() )
                                 <div class="w-full ">
