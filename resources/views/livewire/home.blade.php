@@ -145,7 +145,7 @@
 
                             @php
 
-                                
+
                                if ($escolaSelecionadaId == null) {
                                 if ($pesquisarLivro != null) {
                                     $livrosAll = Livro::where('escola_id', $escola->id)->where('name', 'like', '%' . $pesquisarLivro . '%')->get();
@@ -203,7 +203,7 @@
 
                                         <div class="w-[90%] swiper swiper_{{ $escola->id }}">
                                             <div class=" swiper-wrapper">
-
+                                                
 
                                                 @foreach ( $livrosAll as $livro )
 
@@ -225,67 +225,8 @@
                                                     <div class="w-full h-full pb-2">
                                                         <div class="w-full mt-6 text-lg font-semibold text-center text-gray-800 break-words ">{{ $livro->name }}</div>
                                                     </div>
-
-                                                </div>
-
-                                                <div id="card" class="flex flex-col items-center justify-center w-48 swiper-slide h-60 bg-gradient-to-t from-gray-50 to-gray-400">
-                                                    @auth
-                                                        @if(Auth::user()->id != 5)
-
-                                                            <div class="fixed top-0 flex items-start justify-end w-full">
-                                                                @if(Auth::user()->escola_id == $escola->id)
-                                                                    <x-ts-button color="red" icon="trash" class="w-full h-8 text-sm rounded-none" @click="$dispatch('deleteLivro', {id: {{ $livro->id }}})">Excluir</x-ts-button>
-                                                                @endif
-
-                                                            </div>
-                                                        @endif
-                                                    @endauth
-                                                    <div >
-                                                        <button class="rounded-md shadow-xl shadow-slate-500 w-28 h-36 hover:h-40 hover:w-32 focus:h-40 focus:w-32" @click="$dispatch('openLivro', {id: {{ $livro->id }}})"><img src="{{ asset('storage/capas/' . $livro->image_capa) }}"></button>
-                                                    </div>
-                                                    <div class="w-full h-full pb-2">
-                                                        <div class="w-full mt-6 text-lg font-semibold text-center text-gray-800 break-words ">{{ $livro->name }}</div>
-                                                    </div>
-
-                                                </div>
-
-                                                <div id="card" class="flex flex-col items-center justify-center w-48 swiper-slide h-60 bg-gradient-to-t from-gray-50 to-gray-400">
-                                                    @auth
-                                                        @if(Auth::user()->id != 5)
-
-                                                            <div class="fixed top-0 flex items-start justify-end w-full">
-                                                                @if(Auth::user()->escola_id == $escola->id)
-                                                                    <x-ts-button color="red" icon="trash" class="w-full h-8 text-sm rounded-none" @click="$dispatch('deleteLivro', {id: {{ $livro->id }}})">Excluir</x-ts-button>
-                                                                @endif
-
-                                                            </div>
-                                                        @endif
-                                                    @endauth
-                                                    <div >
-                                                        <button class="rounded-md shadow-xl shadow-slate-500 w-28 h-36 hover:h-40 hover:w-32 focus:h-40 focus:w-32" @click="$dispatch('openLivro', {id: {{ $livro->id }}})"><img src="{{ asset('storage/capas/' . $livro->image_capa) }}"></button>
-                                                    </div>
-                                                    <div class="w-full h-full pb-2">
-                                                        <div class="w-full mt-6 text-lg font-semibold text-center text-gray-800 break-words ">{{ $livro->name }}</div>
-                                                    </div>
-
-                                                </div>
-                                                <div id="card" class="flex flex-col items-center justify-center w-48 swiper-slide h-60 bg-gradient-to-t from-gray-50 to-gray-400">
-                                                    @auth
-                                                        @if(Auth::user()->id != 5)
-
-                                                            <div class="fixed top-0 flex items-start justify-end w-full">
-                                                                @if(Auth::user()->escola_id == $escola->id)
-                                                                    <x-ts-button color="red" icon="trash" class="w-full h-8 text-sm rounded-none" @click="$dispatch('deleteLivro', {id: {{ $livro->id }}})">Excluir</x-ts-button>
-                                                                @endif
-
-                                                            </div>
-                                                        @endif
-                                                    @endauth
-                                                    <div >
-                                                        <button class="rounded-md shadow-xl shadow-slate-500 w-28 h-36 hover:h-40 hover:w-32 focus:h-40 focus:w-32" @click="$dispatch('openLivro', {id: {{ $livro->id }}})"><img src="{{ asset('storage/capas/' . $livro->image_capa) }}"></button>
-                                                    </div>
-                                                    <div class="w-full h-full pb-2">
-                                                        <div class="w-full mt-6 text-lg font-semibold text-center text-gray-800 break-words ">{{ $livro->name }}</div>
+                                                    <div class="flex items-end justify-center w-full pr-1 font-semibold text-gray-600 text-[12px]">
+                                                        {{ $livro->nome_aluno }}
                                                     </div>
 
                                                 </div>

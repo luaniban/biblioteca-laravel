@@ -36,12 +36,12 @@
                 <div class="w-full mt-4 text-lg font-semibold text-center text-gray-800 break-words">{{ $livro->name }}</div>
                 <div class="w-full mt-2 overflow-auto text-center text-gray-600 break-words text-md max-h-56">{{ $livro->description }}</div>
             </div>
-            <div class="mt-8">
+            <div class="mt-16">
 
             </div>
             <div class="absolute z-50 flex flex-col justify-end w-full gap-2 px-6 bottom-1">
                 @auth
-                    @if(Auth::user()->id != 5)
+                    @if(Auth::user()->id != 5 && $livro->escola_id == Auth::user()->escola_id)
                         <x-ts-button icon="pencil"  @click="$dispatch('edit-book', {id: {{ $livro->id }}})"></x-ts-button>
                     @endif
                 @endauth

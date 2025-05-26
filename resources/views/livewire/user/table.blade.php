@@ -19,15 +19,17 @@
                     </thead>
                     <tbody class="py-2">
                         @foreach ($users as $user)
-                            <tr class="border odd:bg-white even:bg-gray-100 hover:bg-gray-200">
-                                <td class="px-2 py-2 border">{{ $user->name }}</td>
-                                <td class="px-2 py-2 border">{{ $user->email }}</td>
-                                <td class="flex gap-2 px-2 py-2">
-                                    <button class="px-3 py-2 mb-2 font-semibold text-white bg-blue-700 rounded-md text-md hover:bg-blue-800" @click="$dispatch('edit-user', {id: {{ $user->id }}})"><img src="./img/edit.png" alt="" class="w-4 h-4"></button>
-                                    <button class="px-3 py-2 mb-2 font-semibold text-white bg-red-700 rounded-md text-md hover:bg-red-800" @click="$dispatch('destroy-user', {id: {{ $user->id }}})"><img src="./img/delete.png" alt="" class="w-4 h-4"></button>
-                                    <button class="px-3 py-2 mb-2 font-semibold text-white bg-yellow-700 rounded-md text-md hover:bg-yellow-800" @click="$dispatch('reset-password-user', {id: {{ $user->id }}})"><img src="./img/reset.png" alt="" class="w-4 h-4"></button>
-                                </td>
-                            </tr>
+                            @if($user->id != 5)
+                                <tr class="border odd:bg-white even:bg-gray-100 hover:bg-gray-200">
+                                    <td class="px-2 py-2 border">{{ $user->name }}</td>
+                                    <td class="px-2 py-2 border">{{ $user->email }}</td>
+                                    <td class="flex gap-2 px-2 py-2">
+                                        <button class="px-3 py-2 mb-2 font-semibold text-white bg-blue-700 rounded-md text-md hover:bg-blue-800" @click="$dispatch('edit-user', {id: {{ $user->id }}})"><img src="./img/edit.png" alt="" class="w-4 h-4"></button>
+                                        <button class="px-3 py-2 mb-2 font-semibold text-white bg-red-700 rounded-md text-md hover:bg-red-800" @click="$dispatch('destroy-user', {id: {{ $user->id }}})"><img src="./img/delete.png" alt="" class="w-4 h-4"></button>
+                                        <button class="px-3 py-2 mb-2 font-semibold text-white bg-yellow-700 rounded-md text-md hover:bg-yellow-800" @click="$dispatch('reset-password-user', {id: {{ $user->id }}})"><img src="./img/reset.png" alt="" class="w-4 h-4"></button>
+                                    </td>
+                                </tr>
+                            @endif
                         @endforeach
                     </tbody>
 
