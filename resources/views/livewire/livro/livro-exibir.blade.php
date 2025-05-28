@@ -22,7 +22,7 @@
     @if($modal)
 
 
-        <div class="fixed bottom-0 right-0 flex flex-col items-center justify-around h-[100%] bg-[#ddf8fc] w-52 z-[80]">
+        <div class="fixed bottom-0 right-0 flex flex-col items-center justify-around h-[100%] bg-[#eaf5ff] w-52 z-[80]">
             <div class="absolute z-50 top-2 right-2">
                 <x-ts-button icon="x-mark" class="rounded-full" wire:click="closeModal" color="none"></x-ts-button>
             </div>

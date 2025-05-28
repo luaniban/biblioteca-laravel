@@ -17,7 +17,7 @@ class LivroExibir extends Component
     public $modalLivro = false;
     public $livro;
     public $nome_aluno;
-
+    public $files = [];
 
     #[On('openLivro')]
     public function openModal($id){
@@ -48,14 +48,14 @@ class LivroExibir extends Component
         $imagick->writeImages($outputDir . 'page_%03d.jpg', true);
 
         // Lista os arquivos gerados
-        $files = [];
+
         foreach (glob($outputDir . '*.jpg') as $file) {
             // Criar caminho relativo para usar com asset()
-            $files[] = 'livro/converted/' . basename($file);
+            $this->files[] = 'livro/converted/' . basename($file);
         }
 
         //dd($files);
-        session(['images' => $files]);
+        session(['livro' => $this->livro, 'images' => $this->files]);
         return redirect()->route('livro-carregado');
     }
 

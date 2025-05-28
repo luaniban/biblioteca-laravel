@@ -1,27 +1,50 @@
-Explicação do sistema:
+📚 Explicação do Sistema
+O objetivo do sistema é permitir a personalização dos livros infantis, promovendo maior interatividade e solucionando o problema comum de os livros virtuais parecerem estáticos e pouco atrativos para as crianças.
 
-O objetivo do sistema consiste na personalização do livro das crianças, buscando interatividade com o livro, sanando o problema que grande parte das crianças tem em o livro ser algo estático virtualmente. 
-A ideia do site é que os livros de cada escola fiquem em suas respectivas prateleiras simulando uma biblioteca.
+A proposta é que os livros de cada escola fiquem organizados em "prateleiras" virtuais, simulando uma biblioteca digital.
 
+👥 Tipos de Usuários
+O sistema contará com três tipos de usuários, com permissões distintas:
 
-O sistema irá possuir 3 tipos de usuários.
+🛠️ Admin Principal
+Responsável pela gestão dos administradores do sistema.
 
-Admin Principal - Função:
-- adicionar outros adms que irão adicionar os livros.
-- Editar os adms adicionados.
-- Deletar os adms adicionados.
-- Resetar a senha dos adms se precisar, porém pode não precisar do uso dessa função pois ao fazer login existe a possibilidade de recuperar a senha por meio do link de resete de senha via email para o usuario. Ao resetar quando o usuário entrar com a senha "Atividade1!" no sistema, o mesmo vai pedir para que a senha seja mudada visando a segurança e que o usuário nao deixe essa senha global como senha.
+Funções:
 
-Admin que adiciona livros (Professores ou Gestores de suas respectivas escolas) - Função:
--Criar o livro do aluno de sua respectiva escola.
--Deletar o livro de sua respectiva escola.
--Editar o livro de sua respectiva escola.
+Adicionar novos administradores (que serão responsáveis por cadastrar os livros).
 
-User (Qualquer pessoa poderá acessar o site) - Função:
--O user não precisa de login para acessar o site, somente os adms.
-- Visualizar Livro.
-- Baixar Livro.
+Editar informações dos administradores.
 
+Remover administradores do sistema.
 
-Com os filtros e inputs de busca, o sistema visa facilitar a busca dos livros da escolha do usuario.
-A responsividade também facilita para os usuários usarem o sistema pelo seu celular.
+Redefinir senhas de administradores, se necessário.
+
+Observação: embora essa função esteja disponível, o próprio sistema oferece um recurso de recuperação de senha por e-mail, tornando esse processo geralmente desnecessário.
+Caso a senha seja redefinida manualmente, o administrador receberá uma senha temporária padrão: "Atividade1!". Ao fazer login, o sistema solicitará a troca da senha imediatamente, como medida de segurança.
+
+✏️ Administrador de Livros (Professores ou Gestores das Escolas)
+Usuários vinculados a uma escola específica, responsáveis pela gestão dos livros da instituição.
+
+Funções:
+
+Criar livros personalizados para os alunos da sua escola.
+
+Editar os livros cadastrados.
+
+Remover livros que não são mais necessários.
+
+👤 Usuário Comum (Visitante)
+Qualquer pessoa que acessar o site.
+
+Funções:
+
+Não é necessário realizar login.
+
+Visualizar os livros disponíveis na biblioteca virtual.
+
+Fazer o download dos livros.
+
+🔍 Funcionalidades Extras
+O sistema conta com filtros e campos de busca, facilitando a localização dos livros desejados.
+
+A interface é responsiva, garantindo uma boa experiência tanto em computadores quanto em dispositivos móveis.

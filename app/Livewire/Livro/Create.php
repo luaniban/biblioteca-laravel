@@ -20,7 +20,7 @@ class Create extends Component
     public $escola_id;
     public $escolaAll;
     public $serie;
-
+    public $livro_formato;
     use Interactions;
     use WithFileUploads;
 
@@ -77,6 +77,7 @@ class Create extends Component
         $this->uploadLivro = null;
         $this->escola_id = '';
         $this->nome_aluno = '';
+        $this->livro_formato = '';
     }
 
     public function create() {
@@ -89,7 +90,8 @@ class Create extends Component
              'uploadLivro' => 'required|mimes:pdf',
              'escola_id' => 'required|integer',
              'nome_aluno' => 'required|string',
-             'serie' => 'required|integer'
+             'serie' => 'required|integer',
+             'livro_formato' => 'required'
         ]);
 
 
@@ -109,7 +111,8 @@ class Create extends Component
             'link' => $this->uploadLivro,
             'escola_id' => $this->escola_id,
             'nome_aluno' =>$this->nome_aluno,
-            'serie' => $this->serie
+            'serie' => $this->serie,
+            'livro_formato' => $this->livro_formato
         ]);
 
 

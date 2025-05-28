@@ -31,17 +31,29 @@
                         <span class="text-red-600">{{$message}}</span>
                     @enderror
                 </div>
-                <div  class="col-span-6 mt-4">
-                    <label for="name" class="text-gray-800 ">Descrição<span class="ml-1 text-red-600">*</span></label>
-                    <textarea type="text" class="w-full border-gray-200 shadow-lg" wire:model="description"></textarea>
-                    @error('description')
-                        <span class="text-red-600">{{$message}}</span>
-                    @enderror
+                <div class="col-span-6 border-gray-200 shadow-lg">
+                    <label for="name" class="text-gray-800 ">Formato do livro<span class="ml-1 text-red-600">*</span></label>
+                    <x-ts-select.styled class=""  wire:model="livro_formato" :options="[
+                        ['label' => 'Retrato', 'value' => 'retrato'],
+                        ['label' => 'Paisagem', 'value' => 'paisagem'],
+                       ]" />
+                    @error('livro_formato')
+                    <span class="text-red-600">{{$message}}</span>
+                @enderror
                 </div>
+
                 <div  class="col-span-6 mt-4">
                     <label for="name" class="text-gray-800 ">Nome do autor (aluno)<span class="ml-1 text-red-600">*</span></label>
                     <input type="text" class="w-full border-gray-200 shadow-lg" wire:model="nome_aluno"></input>
                     @error('nome_aluno')
+                        <span class="text-red-600">{{$message}}</span>
+                    @enderror
+                </div>
+
+                <div  class="col-span-6 mt-4">
+                    <label for="name" class="text-gray-800 ">Descrição<span class="ml-1 text-red-600">*</span></label>
+                    <textarea type="text" class="w-full border-gray-200 shadow-lg" wire:model="description"></textarea>
+                    @error('description')
                         <span class="text-red-600">{{$message}}</span>
                     @enderror
                 </div>

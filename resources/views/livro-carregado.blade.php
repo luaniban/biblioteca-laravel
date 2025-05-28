@@ -24,8 +24,10 @@ font-family: "Poppins", sans-serif;
 
 
 .flipbook {
-width: 1100px;
-height: 700px;
+
+
+/* width: 1300px;
+height: 400px; */
 
 }
 
@@ -56,7 +58,7 @@ border: 1px solid rgba(0, 0, 0, 0.11);
 
 .page img{
 width: 100%;
-object-fit: cover;
+
 margin: 2px;
 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -79,7 +81,7 @@ height: 100%;
 <div id="body" >
 
 
-<div class="flipbook">
+<div class="flipbook" style="width: {{ $width }}; height: {{ $height }};">
 
     @php
         $count = 0;

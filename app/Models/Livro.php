@@ -13,6 +13,7 @@ class Livro extends Model
         'nome_aluno',
         'escola_id',
         'link',
-        'serie'
+        'serie',
+        'livro_formato'
     ];
 }

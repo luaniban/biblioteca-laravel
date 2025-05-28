@@ -48,15 +48,17 @@
                     @enderror
                 </div>
 
-                <div  class="col-span-6 border-gray-200 shadow-lg">
-                    <label for="name" class="text-gray-800">Upload do livro<span class="ml-1 text-red-600">*</span></label>
-                    <x-ts-upload  class="w-full " wire:model="uploadLivro" />
-                    @error('uploadLivro')
-                        <span class="text-red-600">{{$message}}</span>
-                    @enderror
-                </div>
 
-                
+                <div class="col-span-6 border-gray-200 shadow-lg">
+                    <label for="name" class="text-gray-800 ">Formato do livro<span class="ml-1 text-red-600">*</span></label>
+                    <x-ts-select.styled class=""  wire:model="livro_formato" :options="[
+                        ['label' => 'Retrato', 'value' => 'retrato'],
+                        ['label' => 'Paisagem', 'value' => 'paisagem'],
+                       ]" />
+                    @error('livro_formato')
+                    <span class="text-red-600">{{$message}}</span>
+                @enderror
+                </div>
 
 
                 <div class="col-span-6 border-gray-200 shadow-lg">
@@ -74,9 +76,16 @@
                        ]" />
                     @error('serie')
                     <span class="text-red-600">{{$message}}</span>
-                @enderror
+                    @enderror
                 </div>
 
+                <div  class="col-span-6 border-gray-200 shadow-lg">
+                    <label for="name" class="text-gray-800">Upload do livro<span class="ml-1 text-red-600">*</span></label>
+                    <x-ts-upload  class="w-full " wire:model="uploadLivro" />
+                    @error('uploadLivro')
+                        <span class="text-red-600">{{$message}}</span>
+                    @enderror
+                </div>
 
 
 

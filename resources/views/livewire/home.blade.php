@@ -32,7 +32,7 @@
     </style>
     <livewire:livro.livro-exibir/>
     <div class="flex justify-center ">
-        <section class="hidden sm:w-[15%]  bg-[#6293ee] sm:flex flex-col  items-center space-y-8 px-4 pb-4 fixed top-0 left-0 bottom-0">
+        <section class="hidden sm:w-[15%]  bg-[#6293ee] md:flex flex-col  items-center space-y-8 px-4 pb-4 fixed top-0 left-0 bottom-0">
             <img src="./img/logo-prefeitura.png" alt="Logo da prefeitura">
             <hr class="w-full">
            <div class="flex flex-col items-center w-full h-[65%] px-4 py-4 bg-white rounded-md ">
@@ -50,8 +50,10 @@
                 <div class="w-full mt-4 ml-12 mr-8 overflow-y-auto scrollbar-thin-custom h-[100%] ">
                     <div class="max-h-[50vh] flex flex-col gap-5 mt-4 ">
                         @foreach ($escolaAll as $escolaa)
+                        @if($escolaa->name != "Outra escola")
                             <p wire:click="visualizarEscolaEspecifica({{ $escolaa->id }})"  class="text-[#084E80] font-semibold hover:cursor-pointer px-2 py-1 hover:bg-gray-100 text-sm text-center">{{ $escolaa->name }}</p>
                             <hr class="w-[85%]">
+                        @endif
                         @endforeach
                     </div>
                 </div>
@@ -203,15 +205,15 @@
 
                                         <div class="w-[90%] swiper swiper_{{ $escola->id }}">
                                             <div class=" swiper-wrapper">
-                                                
+
 
                                                 @foreach ( $livrosAll as $livro )
 
-                                                <div id="card" class="flex flex-col items-center justify-center w-48 swiper-slide h-60 bg-gradient-to-t from-gray-50 to-gray-400">
+                                                <div id="livro" class="flex flex-col items-center justify-center w-48 swiper-slide h-60 bg-gradient-to-t from-gray-50 to-gray-400">
                                                     @auth
                                                         @if(Auth::user()->id != 5)
 
-                                                            <div class="fixed top-0 flex items-start justify-end w-full">
+                                                            <div class="fixed top-0 w-28">
                                                                 @if(Auth::user()->escola_id == $escola->id)
                                                                     <x-ts-button color="red" icon="trash" class="w-full h-8 text-sm rounded-none" @click="$dispatch('deleteLivro', {id: {{ $livro->id }}})">Excluir</x-ts-button>
                                                                 @endif
@@ -220,12 +222,12 @@
                                                         @endif
                                                     @endauth
                                                     <div >
-                                                        <button class="rounded-md shadow-xl shadow-slate-500 w-28 h-36 hover:h-40 hover:w-32 focus:h-40 focus:w-32" @click="$dispatch('openLivro', {id: {{ $livro->id }}})"><img src="{{ asset('storage/capas/' . $livro->image_capa) }}"></button>
+                                                        <button class="mt-1 rounded-md shadow-xl shadow-slate-500 w-28 h-36 hover:h-40 hover:w-32 focus:h-40 focus:w-32" @click="$dispatch('openLivro', {id: {{ $livro->id }}})"><img class="w-full h-full" src="{{ asset('storage/capas/' . $livro->image_capa) }}"></button>
                                                     </div>
                                                     <div class="w-full h-full pb-2">
-                                                        <div class="w-full mt-6 text-lg font-semibold text-center text-gray-800 break-words ">{{ $livro->name }}</div>
+                                                        <div class="w-full mt-6 font-semibold text-center text-gray-800 break-words text-md ">{{ $livro->name }}</div>
                                                     </div>
-                                                    <div class="flex items-end justify-center w-full pr-1 font-semibold text-gray-600 text-[12px]">
+                                                    <div class="flex items-end justify-center w-full pr-1 font-semibold text-gray-600 text-[12px] mb-2">
                                                         {{ $livro->nome_aluno }}
                                                     </div>
 
