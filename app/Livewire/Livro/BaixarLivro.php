@@ -4,10 +4,10 @@ namespace App\Livewire\Livro;
 
 use Livewire\Component;
 
-use setasign\Fpdi\Fpdi;
+
 use Livewire\Attributes\On;
 
-use Illuminate\Support\Facades\Storage;
+
 
 class BaixarLivro extends Component
 {
