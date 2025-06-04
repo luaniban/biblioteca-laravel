@@ -6,6 +6,7 @@ use App\Models\Livro;
 use Livewire\Component;
 use Livewire\Attributes\On;
 use TallStackUi\Traits\Interactions;
+use Illuminate\Support\Facades\Storage;
 
 class Delete extends Component
 {
@@ -31,6 +32,7 @@ class Delete extends Component
         $this->closeModal();
         $this->toast()->success('Livro deletado com sucesso')->send();
         $this->dispatch('livro-deletado');
+        Storage::disk('public')->delete('storage/' . $this->livro->link);
     }
 
     public function render()

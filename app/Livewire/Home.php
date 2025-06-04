@@ -10,7 +10,7 @@ use Livewire\Attributes\On;
 use Smalot\PdfParser\Parser;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Request;
-
+use Illuminate\Support\Facades\Storage;
 
 class Home extends Component
 {
@@ -76,6 +76,27 @@ class Home extends Component
     {
 
 
+        // $livros = Livro::all();
+        // $arquivos = Storage::disk('public')->files('storage');
+        // $nomesArquivos = array_map('basename', $arquivos);
+
+        // foreach ($nomesArquivos as $arquivo) {
+        //     $valor = 0;
+        //     foreach ($livros as $livro) {
+        //         if($arquivo !== $livro->link){
+        //             $valor = 1;
+        //         }
+        //         else{
+        //             $valor = 0;
+        //         }
+        //     }
+        //     if($valor == 1){
+        //         Storage::disk('public')->delete('storage/' . $arquivo);
+        //     }
+        // }
+
+
+        //dd($nomesArquivos);
         if(\Route::currentRouteName() == 'dashboard' || \Route::currentRouteName() == 'home'){
 
             $arquivos = File::files(public_path('livro/converted/'));
@@ -110,7 +131,7 @@ class Home extends Component
             } else {
                 $this->ordem = '';
             }
-        
+
         //dump($this->livrosAll);
 
 
