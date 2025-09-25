@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3a85656f377f5657d6e8e79bea2d03c9",
+    "content-hash": "79d2531077af79e83a7d8354b0f2d8d2",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -6452,16 +6452,16 @@
         },
         {
             "name": "tallstackui/tallstackui",
-            "version": "v2.6.2",
+            "version": "v2.14.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tallstackui/tallstackui.git",
-                "reference": "46945e6d6d64acef2fcfa70bf62dcfd37fad7a4c"
+                "reference": "71ad25afff4e8c87102b08b554849cea6b155ab8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tallstackui/tallstackui/zipball/46945e6d6d64acef2fcfa70bf62dcfd37fad7a4c",
-                "reference": "46945e6d6d64acef2fcfa70bf62dcfd37fad7a4c",
+                "url": "https://api.github.com/repos/tallstackui/tallstackui/zipball/71ad25afff4e8c87102b08b554849cea6b155ab8",
+                "reference": "71ad25afff4e8c87102b08b554849cea6b155ab8",
                 "shasum": ""
             },
             "require": {
@@ -6476,7 +6476,6 @@
             },
             "require-dev": {
                 "blade-ui-kit/blade-icons": "^1.7",
-                "larastan/larastan": "^2.7",
                 "laravel/pint": "^1.13",
                 "orchestra/testbench": "^8.0|^9.0|^10.0",
                 "orchestra/testbench-dusk": "^8.0|^9.0",
@@ -6516,7 +6515,7 @@
             "description": "TallStackUI is a powerful suite of Blade components that elevate your workflow of Livewire applications.",
             "support": {
                 "issues": "https://github.com/tallstackui/tallstackui/issues",
-                "source": "https://github.com/tallstackui/tallstackui/tree/v2.6.2"
+                "source": "https://github.com/tallstackui/tallstackui/tree/v2.14.1"
             },
             "funding": [
                 {
@@ -6524,7 +6523,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-05-14T21:13:34+00:00"
+            "time": "2025-09-02T14:36:41+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
@@ -10019,12 +10018,12 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.2"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "plugin-api-version": "2.6.0"
 }

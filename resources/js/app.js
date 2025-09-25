@@ -2,6 +2,9 @@ import './bootstrap';
 
 import 'turn.js';
 
+// import Alpine from 'alpinejs';
+// window.Alpine = Alpine;
+
 
 import $ from 'jquery';
 window.$ = $;

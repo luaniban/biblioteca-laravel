@@ -22,24 +22,21 @@
     @if($modal)
 
 
-        <div class="fixed bottom-0 right-0 flex flex-col items-center justify-around h-[100%] bg-[#eaf5ff] w-52 z-[80]">
-            <div class="absolute z-50 top-2 right-2">
-                <x-ts-button icon="x-mark" class="rounded-full" wire:click="closeModal" color="none"></x-ts-button>
-            </div>
-                <div class="flex flex-col items-center w-full mt-8">
+        <div class="  flex flex-col items-center justify-around h-[100%] bg-[#eaf5ff] w-full py-4">
+
+                <div class="flex flex-col items-center w-full mt-4">
                     <div class="font-semibold text-center text-gray-400 text-md ">Feito por:</div>
                     <div class="text-lg font-semibold text-center text-gray-800">{{ $livro->nome_aluno}}</div>
                 </div>
 
             <div id="card" class="flex flex-col items-center justify-center w-full px-4">
-                <div class="w-full rounded-md h-42"><img src="{{ asset('storage/capas/' . $livro->image_capa) }}"></div>
-                <div class="w-full mt-4 text-lg font-semibold text-center text-gray-800 break-words">{{ $livro->name }}</div>
+                <img src="{{ asset('storage/capas/' . $livro->image_capa) }} " class="h-96">
+                <div class="w-full mt-4 text-2xl font-semibold text-center text-gray-800 break-words">{{ $livro->name }}</div>
                 <div class="w-full mt-2 overflow-auto text-center text-gray-600 break-words text-md max-h-56">{{ $livro->description }}</div>
             </div>
-            <div class="mt-16">
 
-            </div>
-            <div class="absolute z-50 flex flex-col justify-end w-full gap-2 px-6 bottom-1">
+
+            <div class="flex flex-col justify-center gap-2 px-6 mt-4">
                 @auth
                     @if(Auth::user()->id != 5 && $livro->escola_id == Auth::user()->escola_id)
                         <x-ts-button icon="pencil"  @click="$dispatch('edit-book', {id: {{ $livro->id }}})"></x-ts-button>
@@ -57,6 +54,8 @@
 
                 <livewire:livro.edit/>
                 <livewire:livro.baixar-livro/>
+
+
 
         </div>
     @endif

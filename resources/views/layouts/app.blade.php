@@ -12,12 +12,10 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Anton&family=Poetsen+One&display=swap" rel="stylesheet">
         <!-- Scripts -->
-        <tallstackui:script />
         @livewireStyles
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-        <!-- Styles -->
-        @livewireStyles
+        <tallstackui:script />
+        @livewireScripts
 
         <script src="https://cdn.tailwindcss.com"></script>
         <!-- Swiper CSS -->
@@ -58,6 +56,6 @@
         @stack('scripts')
 
 
-        {{-- @livewireScripts --}}
+
     </body>
 </html>

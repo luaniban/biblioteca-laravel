@@ -43,7 +43,7 @@ class Create extends Component
 
 
             $imagick = new Imagick();
-            $imagick->setResolution(300, 300);
+            $imagick->setResolution(100, 100);
 
             // Caminho completo do PDF, assumindo que $livro->link é algo como "nome.pdf"
             $pdfPath = storage_path('app/public/storage/' . $ultimoRegistroParaColocarImagemDeCapa->link);

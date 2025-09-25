@@ -115,6 +115,11 @@ height: 100%;
 
 
 </div>
+
+
+<div class="fixed bo">
+    <button>Voltar</button>
+</div>
 </div>
 
 

@@ -21,7 +21,7 @@ class LivroExibir extends Component
 
     #[On('openLivro')]
     public function openModal($id){
-
+        
         $this->modal = true;
 
         $this->livro = Livro::findOrFail($id);

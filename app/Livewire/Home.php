@@ -54,6 +54,10 @@ class Home extends Component
 
     public $ordem ='';
 
+
+    public $slide = false;
+
+
     public $filtroDosLivrosPorSerie = null;
 
     public function visualizarEscolaEspecifica($escolaId) {
@@ -64,6 +68,9 @@ class Home extends Component
     public function openLivro() {
         $this->hiddenOrShow = 'none';
 
+    }
+    public function ativarSlide(){
+        $this->slide = true;
     }
 
 
@@ -147,7 +154,7 @@ class Home extends Component
 
 
 
-        $this->escolaAllList = Escola::all();
+        $this->escolaAllList = Escola::orderByRaw("CASE WHEN name = ? THEN 0 ELSE 1 END", 'SECRETARIA MUNICIPAL DE EDUCAÇÃO')->orderBy('name', 'asc')->get();
 
         if ($this->escolaSelecionadaId !== null) {
             $this->escolaAllList = Escola::where('id', $this->escolaSelecionadaId)->get();
